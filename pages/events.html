@@ -2,11 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
     <title>Event Cinematography - Vedang Cinematography</title>
     <meta name="description" content="Professional event cinematography services capturing dynamic live events with cinematic excellence.">
+    
+    <!-- Critical Resource Preloading -->
+    <link rel="preload" href="../images/events/P1022412.jpg" as="image">
+    <link rel="preload" href="../css/style.css" as="style">
+    
+    <!-- DNS Prefetch for External Resources -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/gallery.css">
+    <link rel="stylesheet" href="../css/performance.css">
+    <link rel="stylesheet" href="../css/mobile-performance.css" media="(max-width: 768px)">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -64,85 +76,34 @@
                 </div>
 
                 <div class="gallery-grid">
-                    <!-- Event Gallery Items -->
-                    <div class="gallery-item tall">
-                        <div class="image-placeholder">
-                            <p>Conference Film<br>Replace with event film thumbnail</p>
-                        </div>
-                        <div class="gallery-overlay">
-                            <h3>Corporate Conferences</h3>
-                            <p>Professional business event coverage</p>
-                        </div>
+                    <!-- Event Gallery Items - Real event photos -->
+
+                    <div class="gallery-item">
+                        <img src="../images/events/P1022496.jpg" alt="Event atmosphere and audience coverage" loading="lazy" decoding="async">
                     </div>
 
                     <div class="gallery-item">
-                        <div class="image-placeholder">
-                            <p>Award Ceremony<br>Replace with ceremony film thumbnail</p>
-                        </div>
-                        <div class="gallery-overlay">
-                            <h3>Award Ceremonies</h3>
-                            <p>Prestigious moments captured cinematically</p>
-                        </div>
+                        <img src="../images/events/P1022538.jpg" alt="Live event photography and documentation" loading="lazy" decoding="async">
                     </div>
 
                     <div class="gallery-item">
-                        <div class="image-placeholder">
-                            <p>Cultural Event<br>Replace with cultural film thumbnail</p>
-                        </div>
-                        <div class="gallery-overlay">
-                            <h3>Cultural Celebrations</h3>
-                            <p>Traditional and cultural event films</p>
-                        </div>
-                    </div>
-
-                    <div class="gallery-item wide">
-                        <div class="image-placeholder">
-                            <p>Launch Event<br>Replace with launch film thumbnail</p>
-                        </div>
-                        <div class="gallery-overlay">
-                            <h3>Product Launches</h3>
-                            <p>Exciting launch event cinematography</p>
-                        </div>
+                        <img src="../images/events/P1022542.jpg" alt="Professional event staging and presentation" loading="lazy" decoding="async">
                     </div>
 
                     <div class="gallery-item">
-                        <div class="image-placeholder">
-                            <p>Gala Dinner<br>Replace with gala film thumbnail</p>
-                        </div>
-                        <div class="gallery-overlay">
-                            <h3>Gala Dinners</h3>
-                            <p>Elegant evening event coverage</p>
-                        </div>
-                    </div>
-
-                    <div class="gallery-item tall">
-                        <div class="image-placeholder">
-                            <p>Exhibition Film<br>Replace with exhibition film thumbnail</p>
-                        </div>
-                        <div class="gallery-overlay">
-                            <h3>Exhibitions</h3>
-                            <p>Trade shows and exhibition films</p>
-                        </div>
+                        <img src="../images/events/P1160770.jpg" alt="Event lighting and stage photography" loading="lazy" decoding="async">
                     </div>
 
                     <div class="gallery-item">
-                        <div class="image-placeholder">
-                            <p>Seminar Coverage<br>Replace with seminar film thumbnail</p>
-                        </div>
-                        <div class="gallery-overlay">
-                            <h3>Seminars & Workshops</h3>
-                            <p>Educational event documentation</p>
-                        </div>
+                        <img src="../images/events/P1160786-1.jpg" alt="Professional event documentation and coverage" loading="lazy" decoding="async">
                     </div>
 
                     <div class="gallery-item">
-                        <div class="image-placeholder">
-                            <p>Festival Film<br>Replace with festival film thumbnail</p>
-                        </div>
-                        <div class="gallery-overlay">
-                            <h3>Festivals</h3>
-                            <p>Vibrant festival cinematography</p>
-                        </div>
+                        <img src="../images/events/P1160793.jpg" alt="Event presentation and professional photography" loading="lazy" decoding="async">
+                    </div>
+
+                    <div class="gallery-item">
+                        <img src="../images/events/P1160829.jpg" alt="Live event coverage and documentation" loading="lazy" decoding="async">
                     </div>
                 </div>
 
@@ -185,8 +146,8 @@
         </footer>
     </div>
 
-    <script src="../js/gsap-animations.js"></script>
-    <script src="../js/main.js"></script>
+    <script src="../js/gsap-animations-optimized.js"></script>
+    <script src="../js/main-optimized.js"></script>
     <script src="../js/gallery.js"></script>
 </body>
 </html>

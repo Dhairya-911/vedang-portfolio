@@ -2,14 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
     <title>Food Cinematography - Vedang Cinematography</title>
     <meta name="description" content="Culinary cinematography and restaurant films that make food look irresistible and tell culinary stories.">
+    
+    <!-- Critical Resource Preloading -->
+    <link rel="preload" href="../images/food/Paneer Final 1.jpg" as="image">
+    <link rel="preload" href="../css/style.css" as="style">
+    
+    <!-- DNS Prefetch for External Resources -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/gallery.css">
+    <link rel="stylesheet" href="../css/performance.css">
+    <link rel="stylesheet" href="../css/mobile-performance.css" media="(max-width: 768px)">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- GSAP Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
 </head>
 <body>
     <div class="page-wrapper">
@@ -59,85 +76,78 @@
                 </div>
 
                 <div class="gallery-grid">
-                    <!-- Food Gallery Items -->
-                    <div class="gallery-item tall">
-                        <div class="image-placeholder">
-                            <p>Restaurant Showcase<br>Replace with restaurant film</p>
-                        </div>
-                        <div class="gallery-overlay">
-                            <h3>Restaurant Showcases</h3>
-                            <p>Complete restaurant experience films</p>
-                        </div>
+                    <!-- Food Gallery Items - Optimized layout to fill all spaces -->
+                    <!-- Row 1: Balanced opening -->
+                    <div class="gallery-item">
+                        <img src="../images/food/Paneer Final 1.jpg" alt="Delicious paneer dish with rich garnishing" loading="lazy" decoding="async">
                     </div>
 
                     <div class="gallery-item">
-                        <div class="image-placeholder">
-                            <p>Chef Profiles<br>Replace with chef film</p>
-                        </div>
-                        <div class="gallery-overlay">
-                            <h3>Chef Profiles</h3>
-                            <p>Culinary artist documentaries</p>
-                        </div>
+                        <img src="../images/food/SAVE_20240623_200605.jpg" alt="Beautifully plated food dish" loading="lazy" decoding="async">
                     </div>
 
                     <div class="gallery-item">
-                        <div class="image-placeholder">
-                            <p>Recipe Videos<br>Replace with recipe film</p>
-                        </div>
-                        <div class="gallery-overlay">
-                            <h3>Recipe Videos</h3>
-                            <p>Step-by-step cooking tutorials</p>
-                        </div>
-                    </div>
-
-                    <div class="gallery-item wide">
-                        <div class="image-placeholder">
-                            <p>Fine Dining<br>Replace with fine dining film</p>
-                        </div>
-                        <div class="gallery-overlay">
-                            <h3>Fine Dining Experience</h3>
-                            <p>Luxury culinary experiences</p>
-                        </div>
+                        <img src="../images/food/SAVE_20240629_110258.jpg" alt="Fine dining food photography" loading="lazy" decoding="async">
                     </div>
 
                     <div class="gallery-item">
-                        <div class="image-placeholder">
-                            <p>Food Preparation<br>Replace with prep film</p>
-                        </div>
-                        <div class="gallery-overlay">
-                            <h3>Food Preparation</h3>
-                            <p>Behind-the-scenes kitchen stories</p>
-                        </div>
+                        <img src="../images/food/SAVE_20240629_110316.jpg" alt="Professional culinary photography" loading="lazy" decoding="async">
                     </div>
 
-                    <div class="gallery-item tall">
-                        <div class="image-placeholder">
-                            <p>Street Food<br>Replace with street food film</p>
-                        </div>
-                        <div class="gallery-overlay">
-                            <h3>Street Food Culture</h3>
-                            <p>Authentic local food experiences</p>
-                        </div>
+                    <!-- Row 2: Standard grid flow -->
+                    <div class="gallery-item">
+                        <img src="../images/food/SAVE_20240629_110335.jpg" alt="Appetizing food styling and presentation" loading="lazy" decoding="async">
                     </div>
 
                     <div class="gallery-item">
-                        <div class="image-placeholder">
-                            <p>Dessert Art<br>Replace with dessert film</p>
-                        </div>
-                        <div class="gallery-overlay">
-                            <h3>Dessert Artistry</h3>
-                            <p>Sweet creations and pastry art</p>
-                        </div>
+                        <img src="../images/food/SAVE_20240629_110410.jpg" alt="Professional food photography with perfect lighting" loading="lazy" decoding="async">
                     </div>
 
                     <div class="gallery-item">
-                        <div class="image-placeholder">
-                            <p>Farm to Table<br>Replace with farm film</p>
-                        </div>
-                        <div class="gallery-overlay">
-                            <h3>Farm to Table</h3>
-                            <p>Sustainable food journey stories</p>
-                        </div>
+                        <img src="../images/food/SAVE_20240629_110415.jpg" alt="Gourmet cuisine and artistic presentation" loading="lazy" decoding="async">
+                    </div>
+
+                    <div class="gallery-item">
+                        <img src="../images/food/SAVE_20240629_110421.jpg" alt="Colorful food photography and styling" loading="lazy" decoding="async">
+                    </div>
+
+                    <!-- Row 3: Continued flow -->
+                    <div class="gallery-item">
+                        <img src="../images/food/SAVE_20240629_110449.jpg" alt="Creative culinary photography composition" loading="lazy" decoding="async">
+                    </div>
+
+                    <div class="gallery-item">
+                        <img src="../images/food/SAVE_20240629_110454.jpg" alt="Food artistry and professional presentation" loading="lazy" decoding="async">
+                    </div>
+
+                    <div class="gallery-item">
+                        <img src="../images/food/SAVE_20240629_110549.jpg" alt="Gourmet food presentation and lighting" loading="lazy" decoding="async">
+                    </div>
+
+                    <div class="gallery-item">
+                        <img src="../images/food/SAVE_20240630_170253.jpg" alt="Professional food styling and composition" loading="lazy" decoding="async">
+                    </div>
+
+                    <!-- Row 4: Completing the grid -->
+                    <div class="gallery-item">
+                        <img src="../images/food/SAVE_20240630_170311.jpg" alt="Artistic food photography and presentation" loading="lazy" decoding="async">
+                    </div>
+
+                    <div class="gallery-item">
+                        <img src="../images/food/SAVE_20240630_221743.jpg" alt="Creative culinary artistry and styling" loading="lazy" decoding="async">
+                    </div>
+
+                    <div class="gallery-item">
+                        <img src="../images/food/SAVE_20240703_210458.jpg" alt="Professional food presentation and styling" loading="lazy" decoding="async">
+                    </div>
+
+                    <div class="gallery-item">
+                        <img src="../images/food/SAVE_20240703_210502 (3).jpg" alt="Gourmet cuisine photography and artistry" loading="lazy" decoding="async">
+                    </div>
+
+                    <!-- Row 5: Final item -->
+                    <div class="gallery-item">
+                        <img src="../images/food/SAVE_20240703_210507.jpg" alt="Creative food styling and professional photography" loading="lazy" decoding="async">
                     </div>
                 </div>
 
@@ -180,7 +190,8 @@
         </footer>
     </div>
 
-    <script src="../js/main.js"></script>
+    <script src="../js/gsap-animations-optimized.js"></script>
+    <script src="../js/main-optimized.js"></script>
     <script src="../js/gallery.js"></script>
 </body>
 </html>
