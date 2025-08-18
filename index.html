@@ -10,6 +10,7 @@
     
     <!-- Critical Resource Preloading -->
     <link rel="preload" href="./images/weddings/KPS-34.jpg" as="image" media="(min-width: 768px)">
+    <link rel="preload" href="css/critical.css" as="style">
     <link rel="preload" href="css/style.css" as="style">
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" as="style">
     
@@ -18,9 +19,12 @@
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     
+    <!-- Critical CSS -->
+    <link rel="stylesheet" href="css/critical.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/performance.css">
     <link rel="stylesheet" href="css/mobile-performance.css" media="(max-width: 768px)">
+    <link rel="stylesheet" href="css/image-optimization.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -381,22 +385,51 @@
 
     <script src="js/gsap-animations-optimized.js"></script>
     <script src="js/main-optimized.js"></script>
+    <script src="js/performance-optimizer.js"></script>
     <script src="js/contact.js"></script>
     
     <!-- Service Worker Registration -->
     <script>
-        // Register Service Worker for caching
+        // Register Enhanced Service Worker for advanced caching
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
+                navigator.serviceWorker.register('/sw-optimized.js')
                     .then((registration) => {
-                        console.log('Service Worker registered successfully');
+                        console.log('Enhanced Service Worker registered successfully');
+                        
+                        // Check for updates
+                        registration.addEventListener('updatefound', () => {
+                            console.log('Service Worker update found');
+                        });
                     })
                     .catch((error) => {
-                        console.log('Service Worker registration failed');
+                        console.log('Service Worker registration failed:', error);
+                        
+                        // Fallback to basic service worker
+                        navigator.serviceWorker.register('/sw.js')
+                            .catch(() => console.log('Fallback Service Worker also failed'));
                     });
             });
         }
+        
+        // Performance monitoring
+        window.addEventListener('load', () => {
+            // Measure and log page performance
+            const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
+            console.log(`Page load time: ${loadTime}ms`);
+            
+            // Check for Largest Contentful Paint
+            if ('PerformanceObserver' in window) {
+                const observer = new PerformanceObserver((list) => {
+                    for (const entry of list.getEntries()) {
+                        if (entry.entryType === 'largest-contentful-paint') {
+                            console.log(`LCP: ${entry.startTime}ms`);
+                        }
+                    }
+                });
+                observer.observe({entryTypes: ['largest-contentful-paint']});
+            }
+        });
     </script>
 </body>
 </html>
