@@ -7,6 +7,7 @@
     <meta name="description" content="Professional wedding cinematography services capturing your special day with cinematic vision and storytelling excellence.">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/gallery.css">
+    <link rel="stylesheet" href="../css/performance.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -15,6 +16,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    
+    <!-- Performance Optimization -->
+    <link rel="preload" href="../images/weddings/KPS.jpg" as="image">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
 </head>
 <body>
     <div class="page-wrapper">
@@ -66,48 +72,17 @@
 
                 <div class="gallery-grid">
                     <!-- Wedding Gallery Items - Beautiful wedding photography -->
-                    <div class="gallery-item tall">
-                        <img src="../images/weddings/KPS.jpg" alt="Beautiful wedding couple portrait" loading="lazy">
+                    <!-- Row 1: Featured showcase -->
+                    <div class="gallery-item wide tall featured">
+                        <img src="../images/weddings/KPS.jpg" alt="Beautiful wedding couple portrait" loading="lazy" decoding="async">
                         <div class="gallery-overlay">
-                            <h3>Wedding Couple</h3>
+                            <h3>Featured Wedding</h3>
                             <p>Sacred moments captured in cinematic beauty</p>
                         </div>
                     </div>
 
-                    <div class="gallery-item">
-                        <img src="../images/weddings/KPS-2.jpg" alt="Wedding ceremony moments" loading="lazy">
-                        <div class="gallery-overlay">
-                            <h3>Ceremony</h3>
-                            <p>Traditional wedding rituals and blessings</p>
-                        </div>
-                    </div>
-
-                    <div class="gallery-item">
-                        <img src="../images/weddings/KPS-3.jpg" alt="Bride getting ready moments" loading="lazy">
-                        <div class="gallery-overlay">
-                            <h3>Bridal Preparation</h3>
-                            <p>Beautiful bridal moments before the ceremony</p>
-                        </div>
-                    </div>
-
-                    <div class="gallery-item wide">
-                        <img src="../images/weddings/KPS-4.jpg" alt="Wedding celebration with family and friends" loading="lazy">
-                        <div class="gallery-overlay">
-                            <h3>Celebration</h3>
-                            <p>Joyous moments with family and friends</p>
-                        </div>
-                    </div>
-
-                    <div class="gallery-item">
-                        <img src="../images/weddings/KPS-5.jpg" alt="Traditional wedding customs" loading="lazy">
-                        <div class="gallery-overlay">
-                            <h3>Traditional Customs</h3>
-                            <p>Rich cultural traditions beautifully captured</p>
-                        </div>
-                    </div>
-
                     <div class="gallery-item tall">
-                        <img src="../images/weddings/KPS-6.jpg" alt="Romantic couple moments" loading="lazy">
+                        <img src="../images/weddings/KPS-6.jpg" alt="Romantic couple moments" loading="lazy" decoding="async">
                         <div class="gallery-overlay">
                             <h3>Romantic Moments</h3>
                             <p>Intimate couple photography</p>
@@ -115,135 +90,140 @@
                     </div>
 
                     <div class="gallery-item">
-                        <img src="../images/weddings/KPS-7.jpg" alt="Wedding decoration and details" loading="lazy">
+                        <img src="../images/weddings/KPS-2.jpg" alt="Wedding ceremony moments" loading="lazy" decoding="async">
+                        <div class="gallery-overlay">
+                            <h3>Ceremony</h3>
+                            <p>Traditional wedding rituals</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item">
+                        <img src="../images/weddings/KPS-3.jpg" alt="Bride getting ready moments" loading="lazy" decoding="async">
+                        <div class="gallery-overlay">
+                            <h3>Bridal Preparation</h3>
+                            <p>Beautiful bridal moments</p>
+                        </div>
+                    </div>
+
+                    <!-- Row 2: Mixed layout -->
+                    <div class="gallery-item">
+                        <img src="../images/weddings/KPS-7.jpg" alt="Wedding decoration and details" loading="lazy" decoding="async">
                         <div class="gallery-overlay">
                             <h3>Wedding Decor</h3>
-                            <p>Beautiful decoration and venue details</p>
-                        </div>
-                    </div>
-
-                    <div class="gallery-item">
-                        <img src="../images/weddings/KPS-8.jpg" alt="Family moments during wedding" loading="lazy">
-                        <div class="gallery-overlay">
-                            <h3>Family Moments</h3>
-                            <p>Precious family memories captured</p>
+                            <p>Beautiful venue details</p>
                         </div>
                     </div>
 
                     <div class="gallery-item wide">
-                        <img src="../images/weddings/KPS-9.jpg" alt="Wedding ceremony rituals" loading="lazy">
+                        <img src="../images/weddings/KPS-9.jpg" alt="Wedding ceremony rituals" loading="lazy" decoding="async">
                         <div class="gallery-overlay">
                             <h3>Sacred Rituals</h3>
-                            <p>Important ceremony moments documented</p>
+                            <p>Important ceremony moments</p>
                         </div>
                     </div>
 
                     <div class="gallery-item">
-                        <img src="../images/weddings/KPS-10.jpg" alt="Candid wedding moments" loading="lazy">
+                        <img src="../images/weddings/KPS-8.jpg" alt="Family moments during wedding" loading="lazy" decoding="async">
                         <div class="gallery-overlay">
-                            <h3>Candid Joy</h3>
-                            <p>Natural expressions of happiness</p>
+                            <h3>Family Moments</h3>
+                            <p>Precious family memories</p>
                         </div>
                     </div>
 
-                    <div class="gallery-item">
-                        <img src="../images/weddings/KPS-11.jpg" alt="Wedding photography artistic shots" loading="lazy">
-                        <div class="gallery-overlay">
-                            <h3>Artistic Vision</h3>
-                            <p>Creative and artistic wedding photography</p>
-                        </div>
-                    </div>
-
+                    <!-- Row 3: Artistic focus -->
                     <div class="gallery-item tall">
-                        <img src="../images/weddings/KPS-12.jpg" alt="Traditional wedding attire" loading="lazy">
+                        <img src="../images/weddings/KPS-12.jpg" alt="Traditional wedding attire" loading="lazy" decoding="async">
                         <div class="gallery-overlay">
                             <h3>Traditional Attire</h3>
-                            <p>Beautiful traditional wedding outfits</p>
+                            <p>Beautiful wedding outfits</p>
                         </div>
                     </div>
 
                     <div class="gallery-item">
-                        <img src="../images/weddings/KPS-13.jpg" alt="Wedding venue and ambiance" loading="lazy">
+                        <img src="../images/weddings/KPS-5.jpg" alt="Traditional wedding customs" loading="lazy" decoding="async">
+                        <div class="gallery-overlay">
+                            <h3>Cultural Traditions</h3>
+                            <p>Rich cultural customs</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item">
+                        <img src="../images/weddings/KPS-10.jpg" alt="Candid wedding moments" loading="lazy" decoding="async">
+                        <div class="gallery-overlay">
+                            <h3>Candid Joy</h3>
+                            <p>Natural expressions</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item">
+                        <img src="../images/weddings/KPS-11.jpg" alt="Wedding photography artistic shots" loading="lazy" decoding="async">
+                        <div class="gallery-overlay">
+                            <h3>Artistic Vision</h3>
+                            <p>Creative photography</p>
+                        </div>
+                    </div>
+
+                    <!-- Row 4: Celebration showcase -->
+                    <div class="gallery-item">
+                        <img src="../images/weddings/KPS-13.jpg" alt="Wedding venue and ambiance" loading="lazy" decoding="async">
                         <div class="gallery-overlay">
                             <h3>Venue Beauty</h3>
-                            <p>Stunning wedding venue captured perfectly</p>
-                        </div>
-                    </div>
-
-                    <div class="gallery-item">
-                        <img src="../images/weddings/KPS-14.jpg" alt="Bride and groom special moments" loading="lazy">
-                        <div class="gallery-overlay">
-                            <h3>Special Moments</h3>
-                            <p>Unforgettable couple memories</p>
-                        </div>
-                    </div>
-
-                    <div class="gallery-item">
-                        <img src="../images/weddings/KPS-15.jpg" alt="Wedding celebration and dance" loading="lazy">
-                        <div class="gallery-overlay">
-                            <h3>Dance & Celebration</h3>
-                            <p>Lively celebration and dance moments</p>
+                            <p>Stunning wedding venues</p>
                         </div>
                     </div>
 
                     <div class="gallery-item wide">
-                        <img src="../images/weddings/KPS-16.jpg" alt="Group photography at wedding" loading="lazy">
+                        <img src="../images/weddings/KPS-16.jpg" alt="Group photography at wedding" loading="lazy" decoding="async">
                         <div class="gallery-overlay">
                             <h3>Group Photography</h3>
-                            <p>Beautiful group photos with loved ones</p>
-                        </div>
-                    </div>
-
-                    <div class="gallery-item">
-                        <img src="../images/weddings/KPS-17.jpg" alt="Wedding ring ceremony" loading="lazy">
-                        <div class="gallery-overlay">
-                            <h3>Ring Ceremony</h3>
-                            <p>Symbolic exchange of wedding rings</p>
-                        </div>
-                    </div>
-
-                    <div class="gallery-item">
-                        <img src="../images/weddings/KPS-18.jpg" alt="Wedding flowers and garlands" loading="lazy">
-                        <div class="gallery-overlay">
-                            <h3>Floral Beauty</h3>
-                            <p>Beautiful flowers and garland details</p>
+                            <p>Beautiful group photos</p>
                         </div>
                     </div>
 
                     <div class="gallery-item tall">
-                        <img src="../images/weddings/KPS-19.jpg" alt="Emotional wedding moments" loading="lazy">
+                        <img src="../images/weddings/KPS-19.jpg" alt="Emotional wedding moments" loading="lazy" decoding="async">
                         <div class="gallery-overlay">
                             <h3>Emotional Moments</h3>
-                            <p>Touching emotional expressions captured</p>
+                            <p>Touching expressions</p>
+                        </div>
+                    </div>
+
+                    <!-- Row 5: Details and celebrations -->
+                    <div class="gallery-item">
+                        <img src="../images/weddings/KPS-14.jpg" alt="Bride and groom special moments" loading="lazy" decoding="async">
+                        <div class="gallery-overlay">
+                            <h3>Special Moments</h3>
+                            <p>Unforgettable memories</p>
                         </div>
                     </div>
 
                     <div class="gallery-item">
-                        <img src="../images/weddings/KPS-20.jpg" alt="Wedding photography details" loading="lazy">
+                        <img src="../images/weddings/KPS-15.jpg" alt="Wedding celebration and dance" loading="lazy" decoding="async">
                         <div class="gallery-overlay">
-                            <h3>Perfect Details</h3>
-                            <p>Every detail beautifully documented</p>
+                            <h3>Dance & Celebration</h3>
+                            <p>Joyous celebration</p>
                         </div>
                     </div>
 
                     <div class="gallery-item">
-                        <img src="../images/weddings/KPS-21.jpg" alt="Traditional wedding blessings" loading="lazy">
+                        <img src="../images/weddings/KPS-17.jpg" alt="Wedding ring ceremony" loading="lazy" decoding="async">
                         <div class="gallery-overlay">
-                            <h3>Blessings</h3>
-                            <p>Traditional blessings and rituals</p>
+                            <h3>Ring Ceremony</h3>
+                            <p>Sacred ring exchange</p>
                         </div>
                     </div>
 
                     <div class="gallery-item">
-                        <img src="../images/weddings/KPS-22.jpg" alt="Wedding couple artistic photography" loading="lazy">
+                        <img src="../images/weddings/KPS-18.jpg" alt="Wedding flowers and garlands" loading="lazy" decoding="async">
                         <div class="gallery-overlay">
-                            <h3>Artistic Couples</h3>
-                            <p>Creative couple photography styles</p>
+                            <h3>Floral Beauty</h3>
+                            <p>Beautiful flower details</p>
                         </div>
                     </div>
 
+                    <!-- Row 6: Final showcase -->
                     <div class="gallery-item wide">
-                        <img src="../images/weddings/KPS-23.jpg" alt="Wedding ceremony panoramic view" loading="lazy">
+                        <img src="../images/weddings/KPS-23.jpg" alt="Wedding ceremony panoramic view" loading="lazy" decoding="async">
                         <div class="gallery-overlay">
                             <h3>Ceremony Overview</h3>
                             <p>Complete ceremony documentation</p>
@@ -251,10 +231,43 @@
                     </div>
 
                     <div class="gallery-item">
-                        <img src="../images/weddings/KPS-24.jpg" alt="Bride portrait photography" loading="lazy">
+                        <img src="../images/weddings/KPS-20.jpg" alt="Wedding photography details" loading="lazy" decoding="async">
+                        <div class="gallery-overlay">
+                            <h3>Perfect Details</h3>
+                            <p>Every detail captured</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item">
+                        <img src="../images/weddings/KPS-21.jpg" alt="Traditional wedding blessings" loading="lazy" decoding="async">
+                        <div class="gallery-overlay">
+                            <h3>Blessings</h3>
+                            <p>Traditional rituals</p>
+                        </div>
+                    </div>
+
+                    <!-- Additional photos in balanced layout -->
+                    <div class="gallery-item tall">
+                        <img src="../images/weddings/KPS-22.jpg" alt="Wedding couple artistic photography" loading="lazy" decoding="async">
+                        <div class="gallery-overlay">
+                            <h3>Artistic Couples</h3>
+                            <p>Creative photography</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item">
+                        <img src="../images/weddings/KPS-24.jpg" alt="Bride portrait photography" loading="lazy" decoding="async">
                         <div class="gallery-overlay">
                             <h3>Bridal Portrait</h3>
-                            <p>Stunning bridal portrait photography</p>
+                            <p>Stunning bridal photography</p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-item">
+                        <img src="../images/weddings/KPS-4.jpg" alt="Wedding celebration with family and friends" loading="lazy" decoding="async">
+                        <div class="gallery-overlay">
+                            <h3>Family Celebration</h3>
+                            <p>Joyous family moments</p>
                         </div>
                     </div>
                 </div>
@@ -298,7 +311,7 @@
         </footer>
     </div>
 
-    <script src="../js/gsap-animations.js"></script>
+    <script src="../js/gsap-animations-optimized.js"></script>
     <script src="../js/main.js"></script>
     <script src="../js/gallery.js"></script>
 </body>

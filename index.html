@@ -3,9 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="theme-color" content="#d4d2a7">
     <title>Vedang Cinematography - Professional Cinematographer</title>
     <meta name="description" content="Professional cinematography services for weddings, events, corporate, concerts, products, food, and advertisements for social media and television.">
+    
+    <!-- Critical Resource Preloading -->
+    <link rel="preload" href="./images/weddings/KPS-34.jpg" as="image" media="(min-width: 768px)">
+    <link rel="preload" href="css/style.css" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" as="style">
+    
+    <!-- DNS Prefetch for External Resources -->
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/performance.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -66,26 +80,26 @@
                 <!-- Filter buttons will be dynamically inserted here by JavaScript -->
                 
                 <div class="portfolio-grid">
-                    <div class="portfolio-item" data-category="weddings">
+                    <div class="portfolio-item performance-critical" data-category="weddings">
                         <div class="portfolio-image">
                             <div class="portfolio-carousel">
                                 <div class="carousel-slide active">
-                                    <img src="./images/weddings/KPS-34.jpg" alt="Beautiful Indian wedding couple during ceremony with flower petals">
+                                    <img src="./images/weddings/KPS-34.jpg" alt="Beautiful Indian wedding couple during ceremony with flower petals" loading="lazy" decoding="async">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img src="./images/weddings/KPS-51.jpg" alt="Bride with haldi ceremony and family blessings">
+                                    <img src="./images/weddings/KPS-51.jpg" alt="Bride with haldi ceremony and family blessings" loading="lazy" decoding="async">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img src="./images/weddings/KPS-58.jpg" alt="Happy couple during haldi ceremony with traditional decorations">
+                                    <img src="./images/weddings/KPS-58.jpg" alt="Happy couple during haldi ceremony with traditional decorations" loading="lazy" decoding="async">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img src="./images/weddings/KPS-63.jpg" alt="Romantic couple dancing under fairy lights at night">
+                                    <img src="./images/weddings/KPS-63.jpg" alt="Romantic couple dancing under fairy lights at night" loading="lazy" decoding="async">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img src="./images/weddings/KPS-67.jpg" alt="Silhouette of couple under starry sky during wedding ceremony">
+                                    <img src="./images/weddings/KPS-67.jpg" alt="Silhouette of couple under starry sky during wedding ceremony" loading="lazy" decoding="async">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img src="./images/weddings/KPS.jpg" alt="Wedding couple portrait with traditional outfits and garlands">
+                                    <img src="./images/weddings/KPS.jpg" alt="Wedding couple portrait with traditional outfits and garlands" loading="lazy" decoding="async">
                                 </div>
                             </div>
                         </div>
@@ -96,7 +110,7 @@
                         </div>
                     </div>
 
-                    <div class="portfolio-item" data-category="events">
+                    <div class="portfolio-item performance-critical" data-category="events">
                         <div class="portfolio-image">
                             <div class="portfolio-carousel">
                                 <div class="carousel-slide active">
@@ -117,7 +131,7 @@
                         </div>
                     </div>
 
-                    <div class="portfolio-item" data-category="corporate">
+                    <div class="portfolio-item performance-critical" data-category="corporate">
                         <div class="portfolio-image">
                             <div class="portfolio-carousel">
                                 <div class="carousel-slide active">
@@ -138,7 +152,7 @@
                         </div>
                     </div>
 
-                    <div class="portfolio-item" data-category="concerts">
+                    <div class="portfolio-item performance-critical" data-category="concerts">
                         <div class="portfolio-image">
                             <div class="portfolio-carousel">
                                 <div class="carousel-slide active">
@@ -159,7 +173,7 @@
                         </div>
                     </div>
 
-                    <div class="portfolio-item" data-category="product">
+                    <div class="portfolio-item performance-critical" data-category="product">
                         <div class="portfolio-image">
                             <div class="portfolio-carousel">
                                 <div class="carousel-slide active">
@@ -180,7 +194,7 @@
                         </div>
                     </div>
 
-                    <div class="portfolio-item" data-category="food">
+                    <div class="portfolio-item performance-critical" data-category="food">
                         <div class="portfolio-image">
                             <div class="portfolio-carousel">
                                 <div class="carousel-slide active">
@@ -201,7 +215,7 @@
                         </div>
                     </div>
 
-                    <div class="portfolio-item" data-category="advertisement">
+                    <div class="portfolio-item performance-critical" data-category="advertisement">
                         <div class="portfolio-image">
                             <div class="portfolio-carousel">
                                 <div class="carousel-slide active">
@@ -337,8 +351,24 @@
         </footer>
     </div>
 
-    <script src="js/gsap-animations.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/gsap-animations-optimized.js"></script>
+    <script src="js/main-optimized.js"></script>
     <script src="js/contact.js"></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        // Register Service Worker for caching
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((registration) => {
+                        console.log('Service Worker registered successfully');
+                    })
+                    .catch((error) => {
+                        console.log('Service Worker registration failed');
+                    });
+            });
+        }
+    </script>
 </body>
 </html>
