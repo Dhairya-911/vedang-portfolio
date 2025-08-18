@@ -29,7 +29,7 @@ class ContactFormHandler {
         } else {
             // Production environment - Replace with your actual Render backend URL
             // Format: https://your-service-name.onrender.com/api/contact
-            return 'https://vedang-portfolio-backend.onrender.com/api/contact';
+            return 'https://vedang-portfolio-kgdn.onrender.com/api/contact';
         }
     }
 

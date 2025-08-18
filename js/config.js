@@ -5,8 +5,8 @@ const API_CONFIG = {
         apiUrl: 'http://localhost:3000/api/contact'
     },
     production: {
-        baseUrl: 'https://vedang-portfolio-backend.onrender.com',
-        apiUrl: 'https://vedang-portfolio-backend.onrender.com/api/contact'
+        baseUrl: 'https://vedang-portfolio-kgdn.onrender.com',
+        apiUrl: 'https://vedang-portfolio-kgdn.onrender.com/api/contact'
     }
 };
 
