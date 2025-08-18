@@ -40,12 +40,13 @@ class OptimizedPortfolio {
             const slides = carousel.querySelectorAll('.carousel-slide');
             let currentSlide = 0;
             let isAnimating = false;
+            let carouselInterval;
 
             // Only create carousel if multiple slides exist
             if (slides.length <= 1) return;
 
-            // Preload only first two images
-            this.preloadCarouselImages(slides, 2);
+            // Preload only first image on mobile, first two on desktop
+            this.preloadCarouselImages(slides, this.isMobile ? 1 : 2);
 
             const nextSlide = () => {
                 if (isAnimating) return;
@@ -55,21 +56,48 @@ class OptimizedPortfolio {
                 currentSlide = (currentSlide + 1) % slides.length;
                 slides[currentSlide].classList.add('active');
 
-                // Preload next image
-                this.preloadCarouselImages(slides, 1, currentSlide + 1);
+                // Preload next image only on desktop
+                if (!this.isMobile) {
+                    this.preloadCarouselImages(slides, 1, currentSlide + 1);
+                }
 
                 setTimeout(() => {
                     isAnimating = false;
-                }, 500);
+                }, this.isMobile ? 300 : 500);
             };
 
-            // Auto-advance only if not reduced motion
+            // Auto-advance with longer intervals on mobile, disable if reduced motion
             if (!this.reducedMotion) {
-                setInterval(nextSlide, this.isMobile ? 4000 : 3000);
+                const interval = this.isMobile ? 5000 : 3000;
+                carouselInterval = setInterval(nextSlide, interval);
+                
+                // Pause carousel when not visible on mobile
+                if (this.isMobile) {
+                    const observer = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                carouselInterval = setInterval(nextSlide, interval);
+                            } else {
+                                clearInterval(carouselInterval);
+                            }
+                        });
+                    }, { threshold: 0.1 });
+                    
+                    observer.observe(carousel);
+                }
             }
 
-            // Touch/click navigation
-            carousel.addEventListener('click', nextSlide);
+            // Touch/click navigation - throttled for mobile
+            let clickTimeout;
+            carousel.addEventListener('click', () => {
+                if (this.isMobile) {
+                    if (clickTimeout) return;
+                    clickTimeout = setTimeout(() => {
+                        clickTimeout = null;
+                    }, 1000);
+                }
+                nextSlide();
+            });
         });
     }
 
@@ -126,34 +154,54 @@ class OptimizedPortfolio {
     }
 
     filterPortfolioItems(items, filter) {
-        items.forEach((item, index) => {
-            const category = item.dataset.category;
-            const shouldShow = filter === 'all' || category === filter;
+        // Use different animation strategies for mobile vs desktop
+        if (this.isMobile) {
+            // Simple show/hide for mobile without transitions
+            items.forEach((item) => {
+                const category = item.dataset.category;
+                const shouldShow = filter === 'all' || category === filter;
+                
+                if (shouldShow) {
+                    item.style.display = 'block';
+                    item.style.opacity = '1';
+                } else {
+                    item.style.display = 'none';
+                    item.style.opacity = '0';
+                }
+            });
+        } else {
+            // Smooth animations for desktop
+            items.forEach((item, index) => {
+                const category = item.dataset.category;
+                const shouldShow = filter === 'all' || category === filter;
 
-            if (shouldShow) {
-                item.style.display = 'block';
-                if (!this.reducedMotion) {
-                    // Staggered animation
-                    setTimeout(() => {
+                if (shouldShow) {
+                    item.style.display = 'block';
+                    if (!this.reducedMotion) {
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'translateY(0)';
+                        }, index * 50);
+                    } else {
                         item.style.opacity = '1';
                         item.style.transform = 'translateY(0)';
-                    }, index * 50);
+                    }
+                } else {
+                    item.style.opacity = '0';
+                    item.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        item.style.display = 'none';
+                    }, this.reducedMotion ? 0 : 300);
                 }
-            } else {
-                item.style.opacity = '0';
-                item.style.transform = 'translateY(20px)';
-                setTimeout(() => {
-                    item.style.display = 'none';
-                }, 300);
-            }
-        });
+            });
+        }
     }
 
     // Intersection Observer for performance
     initIntersectionObserver() {
         const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '50px 0px -50px 0px'
+            threshold: this.isMobile ? 0.05 : 0.1,
+            rootMargin: this.isMobile ? '20px 0px -20px 0px' : '50px 0px -50px 0px'
         };
 
         const observer = new IntersectionObserver((entries) => {
@@ -161,7 +209,7 @@ class OptimizedPortfolio {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('in-view');
                     
-                    // Load images lazily
+                    // Load images lazily - more aggressive on mobile
                     const images = entry.target.querySelectorAll('img[loading="lazy"]');
                     images.forEach(img => {
                         if (img.dataset.src) {
@@ -170,13 +218,19 @@ class OptimizedPortfolio {
                         }
                     });
 
-                    observer.unobserve(entry.target);
+                    // Disconnect observer on mobile to save resources
+                    if (this.isMobile) {
+                        observer.unobserve(entry.target);
+                    }
                 }
             });
         }, observerOptions);
 
-        // Observe portfolio items and sections
-        const elementsToObserve = document.querySelectorAll('.portfolio-item, .about, #contact');
+        // Observe different elements based on device
+        const elementsToObserve = this.isMobile 
+            ? document.querySelectorAll('.portfolio-item, #contact')
+            : document.querySelectorAll('.portfolio-item, .about, #contact');
+            
         elementsToObserve.forEach(el => observer.observe(el));
     }
 
@@ -308,6 +362,37 @@ class OptimizedPortfolio {
                 scrollTicking = true;
             }
         }, { passive: true });
+        
+        // Debounced resize handler for mobile optimization
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                const wasMobile = this.isMobile;
+                this.isMobile = window.innerWidth <= 768;
+                
+                // Reinitialize if device type changed
+                if (wasMobile !== this.isMobile) {
+                    console.log('Device type changed, reinitializing...');
+                    this.reinitializeForDevice();
+                }
+            }, 250);
+        }, { passive: true });
+    }
+    
+    // Reinitialize components when switching between mobile/desktop
+    reinitializeForDevice() {
+        // Clear existing intervals and observers
+        document.querySelectorAll('.portfolio-carousel').forEach(carousel => {
+            // Reset carousel states for new device
+            const slides = carousel.querySelectorAll('.carousel-slide');
+            slides.forEach((slide, index) => {
+                slide.classList.toggle('active', index === 0);
+            });
+        });
+        
+        // Reinitialize carousels with new mobile settings
+        this.initCarousels();
     }
 
     // Notification system

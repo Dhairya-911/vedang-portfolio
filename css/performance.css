@@ -75,6 +75,139 @@ img {
     transition: transform 0.3s ease-out, opacity 0.3s ease-out;
 }
 
+/* Mobile Portfolio Grid Optimizations - Fix Lag on Small Devices */
+@media (max-width: 768px) {
+    /* Disable expensive effects on mobile */
+    .portfolio-item {
+        transform: none !important;
+        will-change: auto !important;
+        transition: none !important;
+        backdrop-filter: none !important;
+        background: #a8a882 !important;
+        border: 1px solid #9a9a7d !important;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+    }
+    
+    .portfolio-item:hover {
+        transform: none !important;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+    }
+    
+    /* Optimize portfolio images for mobile */
+    .portfolio-image {
+        height: 200px !important;
+        overflow: hidden;
+        will-change: auto;
+    }
+    
+    .portfolio-image::after {
+        display: none !important;
+    }
+    
+    .portfolio-carousel {
+        will-change: auto;
+        contain: layout style paint;
+    }
+    
+    .carousel-slide {
+        will-change: auto;
+        transition: opacity 0.3s ease !important;
+    }
+    
+    .carousel-slide img {
+        transform: none !important;
+        transition: none !important;
+        will-change: auto;
+    }
+    
+    .portfolio-item:hover .carousel-slide img {
+        transform: none !important;
+    }
+    
+    .portfolio-item:hover .portfolio-image .image-placeholder {
+        transform: none !important;
+    }
+    
+    /* Optimize portfolio grid layout */
+    .portfolio-grid {
+        display: block !important;
+        contain: layout style;
+    }
+    
+    .portfolio-item {
+        display: block;
+        margin-bottom: 1.5rem;
+        contain: layout style paint;
+    }
+    
+    /* Reduce complexity of gradients on mobile */
+    .portfolio-image .image-placeholder {
+        background: #a8a882 !important;
+        transition: none !important;
+    }
+    
+    .carousel-slide .image-placeholder {
+        background: #a8a882 !important;
+        transition: none !important;
+    }
+    
+    /* Disable complex portfolio backgrounds on mobile */
+    .portfolio::before {
+        display: none !important;
+    }
+    
+    /* Optimize filter buttons for mobile */
+    .filter-btn {
+        transition: none !important;
+        padding: 6px 12px;
+        font-size: 0.85rem;
+    }
+    
+    .filter-btn:hover,
+    .filter-btn.active {
+        transform: none !important;
+        background: #d4d2a7;
+        color: #5a5a47;
+    }
+}
+
+/* Ultra-small devices optimizations */
+@media (max-width: 480px) {
+    .portfolio-item {
+        margin-bottom: 1rem;
+        border-radius: 8px !important;
+    }
+    
+    .portfolio-image {
+        height: 180px !important;
+    }
+    
+    .portfolio-content {
+        padding: 1rem !important;
+    }
+    
+    .portfolio-title {
+        font-size: 1.1rem !important;
+        margin-bottom: 0.3rem;
+    }
+    
+    .portfolio-description {
+        font-size: 0.8rem !important;
+        line-height: 1.3;
+        margin-bottom: 0.8rem;
+    }
+    
+    .portfolio-filters {
+        gap: 6px;
+        margin-bottom: 1.5rem;
+    }
+    
+    .filter-btn {
+        padding: 5px 10px;
+        font-size: 0.8rem;
+    }
+}
+
 .portfolio-carousel img {
     transform: translateZ(0);
     will-change: transform;
