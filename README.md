@@ -1,73 +1,42 @@
-# 📸 Vedang Cinematography Portfolio
+# � Vedang Cinematography Portfolio - Backend API
 
-A modern, responsive photographer portfolio website showcasing professional work across multiple domains including weddings, events, corporate photography, concerts, product photography, food photography, and advertisement campaigns.
-
-![Portfolio Preview](https://via.placeholder.com/800x400/8B4513/F5F3E7?text=Professional+Photography+Portfolio)
+This is the backend API server for the Vedang Cinematography Portfolio website. It provides a RESTful API for handling contact form submissions, admin panel functionality, and database operations.
 
 ## ✨ Features
 
-### 🎨 **Professional Design**
-- Clean, minimalist earth-tone design
-- Typography-focused layout
-- Responsive grid system
-- Smooth animations and transitions
+### 🔧 **API Endpoints**
+- **Contact Form**: Submit and store contact inquiries
+- **Admin Panel**: View and manage contact submissions
+- **Health Check**: API status monitoring
+- **Rate Limiting**: Protection against spam and abuse
 
-### 📱 **Mobile-First Responsive Design**
-- Optimized for all screen sizes (320px - 1920px+)
-- Touch-friendly navigation and interactions
-- Swipe gestures for image carousels
-- iOS Safari optimizations
-- Progressive enhancement approach
+### �️ **Security Features**
+- CORS configuration for cross-origin requests
+- Input validation and sanitization
+- Rate limiting on API endpoints
+- Environment variable protection
+- MongoDB injection prevention
 
-### 🖼️ **Portfolio Showcase**
-- Dynamic image carousels with auto-rotation
-- Touch/swipe navigation support
-- Organized by photography categories:
-  - 💒 Weddings
-  - 🎉 Events
-  - 🏢 Corporate
-  - 🎵 Concerts
-  - 📦 Product Photography
-  - 🍽️ Food Photography
-  - 📺 Advertisement (Social Media & TV)
-
-### 💾 **Backend Integration**
-- MongoDB Atlas database integration
-- Express.js REST API
-- Contact form with validation
-- Admin panel for viewing submissions
-- Rate limiting and security features
-
-### ⚡ **Performance Optimizations**
-- Lazy loading for images
-- Critical resource preloading
-- Optimized mobile interactions
-- Reduced motion support
-- Error handling and fallbacks
+### 💾 **Database Integration**
+- MongoDB Atlas cloud database
+- Mongoose ODM for data modeling
+- Contact form data persistence
+- Admin interface for data management
 
 ## 🛠️ Technology Stack
 
-### Frontend
-- **HTML5** - Semantic markup
-- **CSS3** - Modern CSS with Grid & Flexbox
-- **Vanilla JavaScript** - Dynamic interactions
-- **Responsive Design** - Mobile-first approach
-
-### Backend
 - **Node.js** - Runtime environment
 - **Express.js** - Web framework
 - **MongoDB** - Database (MongoDB Atlas)
 - **Mongoose** - ODM for MongoDB
-
-### Development
-- **Git** - Version control
-- **VS Code** - Development environment
-- **Live Server** - Development server
+- **CORS** - Cross-origin resource sharing
+- **Express Rate Limit** - API protection
+- **Validator** - Input validation
 
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Node.js (v14+)
+- Node.js (v14 or higher)
 - MongoDB Atlas account
 - Git
 
@@ -82,151 +51,230 @@ A modern, responsive photographer portfolio website showcasing professional work
 2. **Install dependencies**
    ```bash
    npm install
-   cd server
-   npm install
    ```
 
 3. **Set up environment variables**
    ```bash
-   cd server
-   cp .env.example .env
-   # Edit .env with your MongoDB connection string
+   cp server/.env.example server/.env
+   # Edit server/.env with your configuration
    ```
 
-4. **Start the development servers**
+4. **Start the server**
    ```bash
-   # Terminal 1 - Backend server
-   cd server
+   # Development mode
    npm run dev
 
-   # Terminal 2 - Frontend (if using Live Server)
-   # Open index.html with Live Server in VS Code
+   # Production mode
+   npm start
    ```
 
-5. **Open your browser**
-   - Frontend: `http://localhost:5500` (Live Server)
-   - Backend API: `http://localhost:3000`
+5. **Access the API**
+   - API Base URL: `http://localhost:3000`
    - Admin Panel: `http://localhost:3000/admin.html`
 
 ## 📁 Project Structure
 
 ```
-vedang-portfolio/
-├── 📄 index.html              # Main homepage
-├── 📁 css/                    # Stylesheets
-│   ├── style.css             # Main styles
-│   └── gallery.css           # Gallery-specific styles
-├── 📁 js/                     # JavaScript files
-│   ├── main.js               # Main functionality
-│   └── contact.js            # Contact form handling
-├── 📁 images/                 # Photography portfolio
-│   └── weddings/             # Wedding photography
-├── 📁 pages/                  # Category pages
-│   ├── weddings.html
-│   ├── events.html
-│   ├── corporate.html
-│   ├── concerts.html
-│   ├── product.html
-│   ├── food.html
-│   └── advertisement.html
-├── 📁 server/                 # Backend application
-│   ├── server.js             # Main server file
-│   ├── 📁 config/            # Configuration
-│   ├── 📁 models/            # Database models
-│   ├── 📁 routes/            # API routes
-│   └── 📁 public/            # Admin panel
-├── package.json              # Frontend dependencies
-└── README.md                 # This file
+backend/
+├── 📄 server.js                 # Main server file
+├── 📁 config/                   # Configuration files
+│   └── database.js             # MongoDB connection
+├── 📁 models/                   # Database models
+│   └── Contact.js              # Contact form model
+├── 📁 routes/                   # API routes
+│   └── contact.js              # Contact endpoints
+├── 📁 public/                   # Static files
+│   └── admin.html              # Admin panel
+├── 📄 package.json             # Dependencies
+└── 📄 .env                     # Environment variables
 ```
 
-## 🎯 Key Features Breakdown
+## 🔌 API Endpoints
 
-### Mobile Optimization
-- **Touch Targets**: All interactive elements meet iOS/Android guidelines (44px minimum)
-- **Gesture Support**: Swipe navigation for carousels and mobile menu
-- **Viewport Handling**: Prevents zoom issues on iOS Safari
-- **Performance**: Optimized scrolling and reduced motion support
+### Contact Routes
 
-### Photography Categories
-Each category features:
-- Dedicated landing pages
-- Responsive image galleries
-- Auto-rotating carousels
-- Touch-friendly navigation
-- Professional descriptions
+#### Submit Contact Form
+```http
+POST /api/contact
+Content-Type: application/json
 
-### Contact System
-- **Frontend**: Responsive contact form with validation
-- **Backend**: MongoDB storage with email notifications
-- **Admin Panel**: View and manage submissions
-- **Security**: Rate limiting and input sanitization
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "phone": "123-456-7890",
+  "eventType": "wedding",
+  "eventDate": "2024-06-15",
+  "location": "New York",
+  "budget": "5000-10000",
+  "message": "Looking for wedding photography services"
+}
+```
 
-## 🔧 Configuration
+#### Get All Contacts (Admin)
+```http
+GET /api/contact
+```
+
+#### Get Contact by ID
+```http
+GET /api/contact/:id
+```
+
+#### Delete Contact
+```http
+DELETE /api/contact/:id
+```
+
+### Health Check
+```http
+GET /api/health
+```
+
+## ⚙️ Configuration
 
 ### Environment Variables
-Create a `.env` file in the server directory:
+
+Create a `.env` file in the `server` directory:
 
 ```env
-# MongoDB Connection
-MONGODB_URI=your_mongodb_atlas_connection_string
+# Database Configuration
+MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/vedang-portfolio
 
 # Server Configuration
 PORT=3000
 NODE_ENV=development
 
-# Contact Form (Optional)
-SMTP_HOST=your_smtp_host
-SMTP_PORT=587
-SMTP_USER=your_email
-SMTP_PASS=your_password
-CONTACT_EMAIL=contact@yourdomain.com
+# CORS Configuration
+FRONTEND_URL=http://localhost:5500
+
+# Rate Limiting
+RATE_LIMIT_WINDOW_MS=900000
+RATE_LIMIT_MAX_REQUESTS=100
+
+# Contact Form Rate Limiting
+CONTACT_RATE_LIMIT_WINDOW_MS=900000
+CONTACT_RATE_LIMIT_MAX_REQUESTS=5
 ```
 
-### MongoDB Setup
-1. Create a MongoDB Atlas account
-2. Create a new cluster
-3. Get your connection string
-4. Add it to your `.env` file
-5. Whitelist your IP address
+### MongoDB Atlas Setup
 
-## 📱 Mobile Features
+1. **Create MongoDB Atlas Account**
+   - Go to [MongoDB Atlas](https://www.mongodb.com/atlas)
+   - Create a free account
 
-### Responsive Breakpoints
-- **Mobile**: 320px - 768px
-- **Tablet**: 768px - 1024px
-- **Desktop**: 1024px+
+2. **Create a Cluster**
+   - Choose free tier (M0)
+   - Select your preferred region
 
-### Touch Interactions
-- Swipe left/right for carousel navigation
-- Swipe up to close mobile menu
-- Touch feedback on all interactive elements
-- Optimized touch targets for accessibility
+3. **Create Database User**
+   - Go to Database Access
+   - Add new database user
+   - Note the username and password
 
-### iOS Specific Optimizations
-- Prevents automatic zoom on input focus
-- Removes tap highlights
-- Handles safe area insets
-- Optimized momentum scrolling
+4. **Configure Network Access**
+   - Go to Network Access
+   - Add IP Address (0.0.0.0/0 for development)
+
+5. **Get Connection String**
+   - Go to Clusters → Connect
+   - Choose "Connect your application"
+   - Copy the connection string
+   - Replace `<password>` with your database user password
 
 ## 🚀 Deployment
 
-### Frontend Deployment (Netlify/Vercel)
-1. Build the project
-2. Deploy the root directory
-3. Set up environment variables
-4. Configure redirects if needed
+### Heroku Deployment
 
-### Backend Deployment (Heroku/Railway)
-1. Push to your Git repository
-2. Connect to deployment service
-3. Set environment variables
-4. Deploy the `server` directory
+1. **Prepare for deployment**
+   ```bash
+   # Ensure all changes are committed
+   git add .
+   git commit -m "Prepare for deployment"
+   ```
 
-### Domain Configuration
-1. Point your domain to the frontend
-2. Set up API subdomain for backend
-3. Configure CORS settings
-4. Set up SSL certificates
+2. **Create Heroku app**
+   ```bash
+   heroku create your-app-name
+   ```
+
+3. **Set environment variables**
+   ```bash
+   heroku config:set MONGODB_URI=your_mongodb_connection_string
+   heroku config:set NODE_ENV=production
+   heroku config:set FRONTEND_URL=https://your-frontend-domain.com
+   ```
+
+4. **Deploy**
+   ```bash
+   git push heroku backend:main
+   ```
+
+### Railway Deployment
+
+1. **Connect GitHub repository**
+   - Go to [Railway](https://railway.app)
+   - Connect your GitHub account
+   - Import this repository
+
+2. **Configure environment variables**
+   - Add all required environment variables
+   - Set `MONGODB_URI` to your MongoDB Atlas connection string
+
+3. **Deploy**
+   - Railway will automatically deploy your application
+
+### Other Platforms
+
+The backend is compatible with:
+- **Render**: Direct GitHub integration
+- **DigitalOcean App Platform**: Container deployment
+- **AWS Elastic Beanstalk**: Scalable deployment
+- **Google Cloud Run**: Serverless deployment
+
+## 🔒 Security Considerations
+
+### Production Security Checklist
+
+- [ ] Use strong MongoDB Atlas password
+- [ ] Restrict MongoDB network access to your server IPs
+- [ ] Set up proper CORS origins (no wildcards in production)
+- [ ] Use HTTPS in production
+- [ ] Keep dependencies updated
+- [ ] Monitor API usage and set up alerts
+- [ ] Implement proper logging
+- [ ] Regular database backups
+
+### Rate Limiting
+
+The API includes built-in rate limiting:
+- **General API**: 100 requests per 15 minutes per IP
+- **Contact Form**: 5 submissions per 15 minutes per IP
+
+## 📊 Monitoring
+
+### Health Check Endpoint
+
+```bash
+curl http://localhost:3000/api/health
+```
+
+Response:
+```json
+{
+  "status": "OK",
+  "timestamp": "2024-08-18T10:30:00.000Z",
+  "uptime": 3600,
+  "database": "connected"
+}
+```
+
+### Logging
+
+The server logs:
+- All API requests
+- Database operations
+- Error messages
+- Rate limit violations
 
 ## 🤝 Contributing
 
@@ -240,19 +288,41 @@ CONTACT_EMAIL=contact@yourdomain.com
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙋‍♂️ Support
+## 🆘 Troubleshooting
 
-For support, email contact@vedangcinematography.com or create an issue in this repository.
+### Common Issues
 
-## 🙏 Acknowledgments
+**Database Connection Error**
+```
+Error: MongoNetworkError: failed to connect to server
+```
+- Check your MongoDB URI
+- Verify network access in MongoDB Atlas
+- Ensure database user credentials are correct
 
-- Photography by Vedang
-- Design inspiration from modern portfolio websites
-- Icons from various open-source icon libraries
-- Fonts from Google Fonts
+**CORS Error**
+```
+Access to fetch at 'http://localhost:3000' from origin 'http://localhost:5500' has been blocked by CORS policy
+```
+- Check `FRONTEND_URL` in environment variables
+- Verify CORS configuration in `server.js`
+
+**Rate Limit Exceeded**
+```
+Too many requests from this IP, please try again later
+```
+- Wait for the rate limit window to reset
+- Check rate limit configuration
+- Consider adjusting limits for development
+
+## 📞 Support
+
+For technical support:
+- Create an issue in this repository
+- Email: support@vedangcinematography.com
 
 ---
 
-**Built with ❤️ for professional photography showcase**
+**Built with ❤️ for professional photography services**
 
-📸 **Vedang Cinematography** - Capturing life's beautiful moments
+� **Backend API** - Powering the Vedang Cinematography Portfolio
