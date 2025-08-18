@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server/server.js",
     "dev": "nodemon server/server.js",
-    "build": "echo 'No build step required for backend'"
+    "build": "npm install && echo 'Dependencies installed for backend'",
+    "postinstall": "cd server && npm install"
   },
   "keywords": [
     "portfolio",
@@ -18,13 +19,13 @@
   "author": "Vedang Mehta",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.19.2",
-    "mongoose": "^8.5.2",
+    "express": "^4.18.2",
+    "mongoose": "^7.5.0",
     "cors": "^2.8.5",
-    "helmet": "^7.1.0",
-    "express-rate-limit": "^7.4.0",
-    "dotenv": "^16.4.5",
-    "validator": "^13.12.0"
+    "helmet": "^7.0.0",
+    "dotenv": "^16.3.1",
+    "express-validator": "^7.0.1",
+    "express-rate-limit": "^6.10.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.4"
