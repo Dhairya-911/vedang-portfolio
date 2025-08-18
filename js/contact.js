@@ -1,7 +1,8 @@
 // Contact Form Handler with MongoDB Integration
 class ContactFormHandler {
     constructor() {
-        this.apiUrl = 'http://localhost:3000/api/contact';
+        // Determine API URL based on environment
+        this.apiUrl = this.getApiUrl();
         this.form = document.getElementById('contactForm');
         this.submitBtn = document.getElementById('submitBtn');
         this.submitText = document.getElementById('submitText');
@@ -9,6 +10,19 @@ class ContactFormHandler {
         this.formStatus = document.getElementById('formStatus');
         
         this.init();
+    }
+
+    getApiUrl() {
+        // Check if we're in development or production
+        const hostname = window.location.hostname;
+        
+        if (hostname === 'localhost' || hostname === '127.0.0.1') {
+            // Development environment
+            return 'http://localhost:3000/api/contact';
+        } else {
+            // Production environment - update this with your actual backend URL
+            return 'https://your-backend-url.herokuapp.com/api/contact';
+        }
     }
 
     init() {
