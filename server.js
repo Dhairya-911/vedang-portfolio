@@ -28,6 +28,7 @@ const allowedOrigins = process.env.CORS_ORIGIN
         'http://localhost:8000',
         'http://127.0.0.1:8000',
         'http://localhost:3000',
+        'https://vedang-portfolio.vercel.app',
         'https://vedang-portfolio.onrender.com',
         'https://vedang-cinematography.netlify.app',
         'https://dhairya-911.github.io'
