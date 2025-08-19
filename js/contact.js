@@ -72,9 +72,16 @@ class ContactFormHandler {
             const result = await response.json();
 
             if (result.success) {
-                this.showSuccess(result.message);
+                // Show success message with enhanced user feedback
+                const successMessage = result.message || 'Thank you! Your message has been sent successfully. I\'ll get back to you within 24 hours.';
+                this.showSuccess(successMessage);
                 this.form.reset();
                 this.clearAllErrors();
+                
+                // Auto-hide success message after 5 seconds
+                setTimeout(() => {
+                    this.hideStatus();
+                }, 5000);
                 
                 // Optional: Track successful submission
                 if (typeof gtag !== 'undefined') {
@@ -214,12 +221,34 @@ class ContactFormHandler {
 
     showSuccess(message) {
         this.formStatus.className = 'form-status success show';
-        this.formStatus.textContent = message;
+        this.formStatus.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="color: #27ae60; font-size: 1.2em;">✓</span>
+                <span>${message}</span>
+            </div>
+        `;
+        
+        // Scroll to message if needed
+        this.formStatus.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'nearest' 
+        });
     }
 
     showError(message) {
         this.formStatus.className = 'form-status error show';
-        this.formStatus.textContent = message;
+        this.formStatus.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="color: #e74c3c; font-size: 1.2em;">⚠</span>
+                <span>${message}</span>
+            </div>
+        `;
+        
+        // Scroll to message if needed
+        this.formStatus.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'nearest' 
+        });
     }
 
     hideStatus() {
@@ -290,7 +319,7 @@ document.addEventListener('DOMContentLoaded', function() {
     new CharacterCounter();
 });
 
-// Add CSS for character counter
+// Add CSS for character counter and form status
 const counterCSS = `
 .character-counter {
     font-size: 0.8rem;
@@ -298,6 +327,35 @@ const counterCSS = `
     text-align: right;
     margin-top: 0.25rem;
     font-weight: 500;
+}
+
+.form-status {
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+    font-weight: 500;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    display: none;
+}
+
+.form-status.show {
+    opacity: 1;
+    transform: translateY(0);
+    display: block;
+}
+
+.form-status.success {
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+}
+
+.form-status.error {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
 }
 `;
 
