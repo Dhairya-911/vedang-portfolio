@@ -20,8 +20,8 @@ class ContactFormHandler {
             // Development environment
             return 'http://localhost:3000/api/contact';
         } else {
-            // Production environment - update this with your actual backend URL
-            return 'https://your-backend-url.herokuapp.com/api/contact';
+            // Production environment - Update with your actual Render backend URL
+            return 'https://vedang-portfolio-backend.onrender.com/api/contact';
         }
     }
 
