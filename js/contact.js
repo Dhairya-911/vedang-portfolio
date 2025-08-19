@@ -301,6 +301,6 @@ const counterCSS = `
 `;
 
 // Inject CSS
-const style = document.createElement('style');
-style.textContent = counterCSS;
-document.head.appendChild(style);
+const counterStyle = document.createElement('style');
+counterStyle.textContent = counterCSS;
+document.head.appendChild(counterStyle);

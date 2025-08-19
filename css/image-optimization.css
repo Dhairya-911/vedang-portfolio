@@ -9,7 +9,8 @@ img {
     transition: opacity 0.3s ease;
 }
 
-/* Lazy loading placeholder */
+/* Lazy loading placeholder - DISABLED to fix carousel visibility */
+/* 
 img[loading="lazy"] {
     opacity: 0;
     transform: translateY(20px);
@@ -17,6 +18,13 @@ img[loading="lazy"] {
 }
 
 img[loading="lazy"].loaded {
+    opacity: 1;
+    transform: translateY(0);
+}
+*/
+
+/* Ensure all images are visible by default */
+img[loading="lazy"] {
     opacity: 1;
     transform: translateY(0);
 }

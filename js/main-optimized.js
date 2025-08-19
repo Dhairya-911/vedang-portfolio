@@ -6,6 +6,7 @@ class OptimizedPortfolio {
         this.isMobile = window.innerWidth <= 768;
         this.reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         this.init();
+        this.initHeroTextAnimation();
     }
 
     init() {
@@ -13,7 +14,6 @@ class OptimizedPortfolio {
         if ('requestIdleCallback' in window) {
             requestIdleCallback(() => {
                 this.initPortfolioFilters();
-                this.initCarousels();
                 this.initIntersectionObserver();
                 this.initScrollOptimizations();
             });
@@ -21,7 +21,6 @@ class OptimizedPortfolio {
             // Fallback for browsers without requestIdleCallback
             setTimeout(() => {
                 this.initPortfolioFilters();
-                this.initCarousels();
                 this.initIntersectionObserver();
                 this.initScrollOptimizations();
             }, 100);
@@ -29,88 +28,57 @@ class OptimizedPortfolio {
 
         // Initialize critical features immediately
         this.initNavigation();
+        this.initSmoothScrolling();
         this.initContactForm();
     }
 
-    // Optimized carousel with lazy loading
-    initCarousels() {
-        const carousels = document.querySelectorAll('.portfolio-carousel');
-        
-        carousels.forEach(carousel => {
-            const slides = carousel.querySelectorAll('.carousel-slide');
-            let currentSlide = 0;
-            let isAnimating = false;
-            let carouselInterval;
+    // Hero text animation
+    initHeroTextAnimation() {
+        const heroTitle = document.getElementById('heroTitle');
+        if (!heroTitle) return;
 
-            // Only create carousel if multiple slides exist
-            if (slides.length <= 1) return;
+        // Prevent any interaction
+        heroTitle.style.userSelect = 'none';
+        heroTitle.style.webkitUserSelect = 'none';
+        heroTitle.style.mozUserSelect = 'none';
+        heroTitle.style.msUserSelect = 'none';
+        heroTitle.style.pointerEvents = 'none';
+        heroTitle.setAttribute('unselectable', 'on');
 
-            // Preload only first image on mobile, first two on desktop
-            this.preloadCarouselImages(slides, this.isMobile ? 1 : 2);
+        const texts = [
+            'CINEMATIC STORYTELLING',
+            'VISUAL EXCELLENCE', 
+            'CREATIVE VIDEOGRAPHY',
+            'PROFESSIONAL FILMING',
+            'ARTISTIC VISION',
+            'CINEMATIC MASTERY'
+        ];
 
-            const nextSlide = () => {
-                if (isAnimating) return;
-                isAnimating = true;
+        let currentIndex = 0;
 
-                slides[currentSlide].classList.remove('active');
-                currentSlide = (currentSlide + 1) % slides.length;
-                slides[currentSlide].classList.add('active');
-
-                // Preload next image only on desktop
-                if (!this.isMobile) {
-                    this.preloadCarouselImages(slides, 1, currentSlide + 1);
+        const changeText = () => {
+            currentIndex = (currentIndex + 1) % texts.length;
+            
+            // Use GSAP to animate the entire title element
+            gsap.to(heroTitle, {
+                opacity: 0,
+                duration: 0.4,
+                ease: "power2.inOut",
+                onComplete: () => {
+                    heroTitle.textContent = texts[currentIndex];
+                    gsap.to(heroTitle, {
+                        opacity: 1,
+                        duration: 0.4,
+                        ease: "power2.inOut"
+                    });
                 }
-
-                setTimeout(() => {
-                    isAnimating = false;
-                }, this.isMobile ? 300 : 500);
-            };
-
-            // Auto-advance with longer intervals on mobile, disable if reduced motion
-            if (!this.reducedMotion) {
-                const interval = this.isMobile ? 5000 : 3000;
-                carouselInterval = setInterval(nextSlide, interval);
-                
-                // Pause carousel when not visible on mobile
-                if (this.isMobile) {
-                    const observer = new IntersectionObserver((entries) => {
-                        entries.forEach(entry => {
-                            if (entry.isIntersecting) {
-                                carouselInterval = setInterval(nextSlide, interval);
-                            } else {
-                                clearInterval(carouselInterval);
-                            }
-                        });
-                    }, { threshold: 0.1 });
-                    
-                    observer.observe(carousel);
-                }
-            }
-
-            // Touch/click navigation - throttled for mobile
-            let clickTimeout;
-            carousel.addEventListener('click', () => {
-                if (this.isMobile) {
-                    if (clickTimeout) return;
-                    clickTimeout = setTimeout(() => {
-                        clickTimeout = null;
-                    }, 1000);
-                }
-                nextSlide();
             });
-        });
-    }
+        };
 
-    preloadCarouselImages(slides, count, startIndex = 0) {
-        for (let i = 0; i < count && (startIndex + i) < slides.length; i++) {
-            const slide = slides[startIndex + i];
-            const img = slide.querySelector('img');
-            if (img && !img.complete) {
-                // Create a new image to preload
-                const preloadImg = new Image();
-                preloadImg.src = img.src;
-            }
-        }
+        // Start animation after initial delay
+        setTimeout(() => {
+            setInterval(changeText, 3000);
+        }, 2000);
     }
 
     // Optimized portfolio filters
@@ -262,7 +230,7 @@ class OptimizedPortfolio {
             }
         });
 
-        // Smooth scroll for navigation links
+        // Smooth scroll for navigation links with GSAP
         navMenu.addEventListener('click', (e) => {
             if (e.target.classList.contains('nav-link')) {
                 e.preventDefault();
@@ -271,11 +239,15 @@ class OptimizedPortfolio {
                 
                 if (targetElement) {
                     const headerHeight = document.querySelector('.header').offsetHeight;
-                    const targetPosition = targetElement.offsetTop - headerHeight;
                     
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
+                    // Use GSAP ScrollToPlugin for smooth scrolling
+                    gsap.to(window, {
+                        duration: 1.2,
+                        scrollTo: {
+                            y: targetElement,
+                            offsetY: headerHeight
+                        },
+                        ease: "power2.inOut"
                     });
 
                     // Close mobile menu
@@ -287,6 +259,36 @@ class OptimizedPortfolio {
                     }
                 }
             }
+        });
+    }
+
+    // Initialize smooth scrolling for all anchor links
+    initSmoothScrolling() {
+        // Handle all anchor links that point to sections on the same page
+        document.addEventListener('click', (e) => {
+            // Check if clicked element is an anchor link
+            const link = e.target.closest('a[href^="#"]');
+            if (!link) return;
+
+            const targetId = link.getAttribute('href');
+            if (!targetId || targetId === '#') return;
+
+            const targetElement = document.querySelector(targetId);
+            if (!targetElement) return;
+
+            e.preventDefault();
+
+            const headerHeight = document.querySelector('.header')?.offsetHeight || 0;
+            
+            // Use GSAP ScrollToPlugin for smooth scrolling
+            gsap.to(window, {
+                duration: 1.2,
+                scrollTo: {
+                    y: targetElement,
+                    offsetY: headerHeight
+                },
+                ease: "power2.inOut"
+            });
         });
     }
 
@@ -382,17 +384,8 @@ class OptimizedPortfolio {
     
     // Reinitialize components when switching between mobile/desktop
     reinitializeForDevice() {
-        // Clear existing intervals and observers
-        document.querySelectorAll('.portfolio-carousel').forEach(carousel => {
-            // Reset carousel states for new device
-            const slides = carousel.querySelectorAll('.carousel-slide');
-            slides.forEach((slide, index) => {
-                slide.classList.toggle('active', index === 0);
-            });
-        });
-        
-        // Reinitialize carousels with new mobile settings
-        this.initCarousels();
+        console.log('📱 Device switch detected - reinitializing components');
+        // Additional device-specific reinitializations can be added here
     }
 
     // Notification system
@@ -420,9 +413,14 @@ class OptimizedPortfolio {
             if (navigationEntries.length > 0) {
                 const nav = navigationEntries[0];
                 console.log('🔍 Page Performance Metrics:');
-                console.log(`DOM Content Loaded: ${Math.round(nav.domContentLoadedEventEnd - nav.navigationStart)}ms`);
-                console.log(`Page Load Complete: ${Math.round(nav.loadEventEnd - nav.navigationStart)}ms`);
-                console.log(`First Paint: ${Math.round(nav.responseStart - nav.navigationStart)}ms`);
+                
+                const domTime = nav.domContentLoadedEventEnd - nav.navigationStart;
+                const loadTime = nav.loadEventEnd - nav.navigationStart;
+                const firstPaint = nav.responseStart - nav.navigationStart;
+                
+                console.log(`DOM Content Loaded: ${domTime > 0 ? Math.round(domTime) : 'N/A'}ms`);
+                console.log(`Page Load Complete: ${loadTime > 0 ? Math.round(loadTime) : 'N/A'}ms`);
+                console.log(`First Paint: ${firstPaint > 0 ? Math.round(firstPaint) : 'N/A'}ms`);
             }
         }
     }
@@ -431,6 +429,20 @@ class OptimizedPortfolio {
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     new OptimizedPortfolio();
+    
+    // Initialize GSAP animations with retry mechanism
+    const initGSAP = () => {
+        if (typeof GSAPAnimationsOptimized !== 'undefined' && typeof gsap !== 'undefined') {
+            new GSAPAnimationsOptimized();
+            console.log('✅ GSAP Animations initialized');
+        } else {
+            console.log('⏳ Waiting for GSAP to load...');
+            setTimeout(initGSAP, 100);
+        }
+    };
+    
+    // Try to initialize GSAP immediately, with fallback
+    initGSAP();
     
     // Performance monitoring in development
     if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
@@ -446,5 +458,18 @@ document.addEventListener('visibilitychange', () => {
     } else {
         // Resume operations when tab becomes visible
         console.log('Tab visible - resuming operations');
+    }
+});
+
+// Final fallback for GSAP animations on window load
+window.addEventListener('load', () => {
+    // Double-check GSAP animations are running
+    if (typeof GSAPAnimationsOptimized !== 'undefined' && typeof gsap !== 'undefined') {
+        // Force re-initialize hero animations if they haven't run
+        const heroTitle = document.querySelector('.hero-title');
+        if (heroTitle && gsap.getProperty(heroTitle, 'opacity') === 0) {
+            console.log('🔄 Re-initializing hero animations');
+            const gsapInstance = new GSAPAnimationsOptimized();
+        }
     }
 });

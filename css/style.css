@@ -5,6 +5,26 @@
     box-sizing: border-box;
 }
 
+/* Prevent cursor blinking anywhere */
+*, *:before, *:after {
+    caret-color: transparent;
+}
+
+/* Additional cursor prevention */
+body, html {
+    caret-color: transparent !important;
+}
+
+/* Prevent text cursor on all interactive elements */
+input, textarea, [contenteditable], [contenteditable="true"] {
+    caret-color: auto;
+}
+
+/* Override for non-input elements */
+:not(input):not(textarea):not([contenteditable]):not([contenteditable="true"]) {
+    caret-color: transparent !important;
+}
+
 /* GSAP Animation Support */
 html {
     scroll-behavior: auto; /* Let GSAP handle smooth scrolling */
@@ -161,7 +181,8 @@ h1, h2, h3 {
     min-height: 100vh;
     display: flex;
     align-items: center;
-    padding: 120px 2rem 80px;
+    justify-content: center;
+    padding: 120px 0 80px;
     background: 
         linear-gradient(135deg, rgba(245, 243, 231, 0.1) 0%, rgba(212, 210, 167, 0.2) 50%, rgba(168, 168, 130, 0.3) 100%),
         #c0392b;
@@ -170,6 +191,17 @@ h1, h2, h3 {
     background-attachment: fixed;
     position: relative;
     overflow: hidden;
+    width: 100%;
+}
+
+.hero-container {
+    display: flex;
+    align-items: center;
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 2rem;
+    gap: 3rem;
 }
 
 .hero::before {
@@ -188,9 +220,12 @@ h1, h2, h3 {
 
 .hero-content {
     flex: 1;
-    max-width: 600px;
+    max-width: 650px;
     position: relative;
     z-index: 2;
+    padding: 2rem;
+    box-sizing: border-box;
+    flex-shrink: 0;
 }
 
 .hero-title {
@@ -201,6 +236,18 @@ h1, h2, h3 {
     color: #ffffff;
     line-height: 1.2;
     text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.8);
+    text-align: left;
+    caret-color: transparent !important;
+    user-select: none !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    pointer-events: none !important;
+    outline: none !important;
+    border: none !important;
+    cursor: default !important;
+    -webkit-touch-callout: none !important;
+    -webkit-tap-highlight-color: transparent !important;
 }
 
 .hero-subtitle {
@@ -257,8 +304,26 @@ h1, h2, h3 {
 }
 
 .hero-image {
-    flex: 1;
-    margin-left: 3rem;
+    flex: 0 0 45%;
+    max-width: 500px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    margin-left: 1.5rem;
+    flex-shrink: 0;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+}
+
+.hero-image img:hover {
+    transform: scale(1.02);
 }
 
 .image-placeholder {
@@ -309,6 +374,8 @@ h1, h2, h3 {
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 3rem;
     margin-top: 4rem;
+    transform: translateZ(0);
+    will-change: transform;
 }
 
 .portfolio-item {
@@ -318,7 +385,8 @@ h1, h2, h3 {
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
-    backdrop-filter: blur(10px);
+    transform: translateZ(0);
+    will-change: transform;
 }
 
 .portfolio-item:hover {
@@ -370,37 +438,17 @@ h1, h2, h3 {
     transform: scale(1.05);
 }
 
-/* Portfolio Carousel Styles */
-.portfolio-carousel {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-
-.carousel-slide {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-}
-
-.carousel-slide.active {
-    opacity: 1;
-}
-
-.carousel-slide img {
+/* Direct portfolio image styles (without carousel) */
+.portfolio-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
     transition: transform 0.3s ease;
+    display: block;
 }
 
-.portfolio-item:hover .carousel-slide img {
+.portfolio-item:hover .portfolio-image img {
     transform: scale(1.05);
 }
 
@@ -905,25 +953,29 @@ h1, h2, h3 {
 
     /* Hero Section Mobile */
     .hero {
-        flex-direction: column;
-        text-align: center;
-        padding: 120px 1rem 80px;
+        padding: 120px 0 80px;
         min-height: 100vh;
         justify-content: center;
+    }
+    
+    .hero-container {
+        flex-direction: column;
+        text-align: center;
+        padding: 0 1rem;
+        gap: 2rem;
     }
 
     .hero-content {
         max-width: 100%;
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
+        padding: 1.5rem;
+        box-sizing: border-box;
     }
 
     .hero-image {
-        margin-left: 0;
-        margin-top: 2rem;
         width: 100%;
         max-width: 350px;
-        margin-left: auto;
-        margin-right: auto;
+        margin: 1rem auto 0;
     }
 
     .hero-title {
@@ -931,6 +983,13 @@ h1, h2, h3 {
         line-height: 1.1;
         margin-bottom: 1.5rem;
         letter-spacing: 1px;
+        min-height: 1.2em;
+        text-align: center;
+    }
+
+    .animated-text {
+        display: block;
+        text-align: center;
     }
 
     .hero-subtitle {
@@ -1169,8 +1228,16 @@ h1, h2, h3 {
     .hero-title {
         font-size: 2.2rem;
         line-height: 1.1;
-        margin-bottom: 1rem;
         letter-spacing: 1px;
+        margin-bottom: 1rem;
+        min-height: 1.1em;
+        text-align: center;
+    }
+
+    .animated-text {
+        display: block;
+        text-align: center;
+        word-break: break-word;
     }
 
     .hero-subtitle {

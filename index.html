@@ -8,6 +8,71 @@
     <title>Vedang Cinematography - Professional Cinematographer</title>
     <meta name="description" content="Professional cinematography services for weddings, events, corporate, concerts, products, food, and advertisements for social media and television.">
     
+    <!-- Favicon -->
+        
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3e%3crect width='32' height='32' fill='%232c3e50'/%3e%3ctext x='16' y='20' font-family='Arial, sans-serif' font-size='18' font-weight='bold' text-anchor='middle' fill='%23ecf0f1'%3eV%3c/text%3e%3c/svg%3e">
+    
+    <!-- DNS Prefetch and Preconnect for External Resources -->
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <!-- Critical Resource Preloading -->
+    <link rel="preload" href="./images/weddings/KPS-34.jpg" as="image" media="(min-width: 768px)" fetchpriority="high">
+    <link rel="preload" href="css/critical-optimized.css" as="style" fetchpriority="high">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" as="script">
+    
+    <!-- Critical CSS - Inline for performance -->
+    <link rel="stylesheet" href="css/critical-optimized.css">
+    
+    <!-- Non-critical CSS with media queries for better loading -->
+    <link rel="stylesheet" href="css/style.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="css/carousel.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="css/no-cursor.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="css/performance.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="css/mobile-performance.css" media="(max-width: 768px)">
+    <link rel="stylesheet" href="css/image-optimization.css" media="print" onload="this.media='all'">
+    
+    <!-- Web Fonts with optimized loading -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    
+    <!-- Critical JavaScript -->
+    <script>
+        // Inline critical performance script
+        (function() {
+            // Early performance optimizations
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function() {
+                    navigator.serviceWorker.register('/sw-optimized.js').catch(function() {});
+                });
+            }
+            
+            // Critical font loading
+            if ('fonts' in document) {
+                document.fonts.load('1em Inter').then(function() {
+                    document.documentElement.classList.add('fonts-loaded');
+                });
+            }
+            
+            // Viewport height fix for mobile
+            function setVH() {
+                document.documentElement.style.setProperty('--vh', (window.innerHeight * 0.01) + 'px');
+            }
+            setVH();
+            window.addEventListener('resize', setVH);
+        })();
+    </script>
+    
+    <!-- GSAP Libraries with optimized loading -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" async></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" async></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js" async></script>
+    
     <!-- Critical Resource Preloading -->
     <link rel="preload" href="./images/weddings/KPS-34.jpg" as="image" media="(min-width: 768px)">
     <link rel="preload" href="css/critical.css" as="style">
@@ -22,6 +87,8 @@
     <!-- Critical CSS -->
     <link rel="stylesheet" href="css/critical.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/carousel.css">
+    <link rel="stylesheet" href="css/no-cursor.css">
     <link rel="stylesheet" href="css/performance.css">
     <link rel="stylesheet" href="css/mobile-performance.css" media="(max-width: 768px)">
     <link rel="stylesheet" href="css/image-optimization.css">
@@ -29,10 +96,51 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- GSAP Libraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+    <!-- Critical JavaScript -->
+    <script>
+        // Inline critical performance script
+        (function() {
+            // Early performance optimizations
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', function() {
+                    navigator.serviceWorker.register('/sw-optimized.js').catch(function() {});
+                });
+            }
+            
+            // Critical font loading
+            if ('fonts' in document) {
+                document.fonts.load('1em Inter').then(function() {
+                    document.documentElement.classList.add('fonts-loaded');
+                });
+            }
+            
+            // Viewport height fix for mobile
+            function setVH() {
+                document.documentElement.style.setProperty('--vh', (window.innerHeight * 0.01) + 'px');
+            }
+            setVH();
+            window.addEventListener('resize', setVH);
+            
+            // Load GSAP libraries dynamically
+            function loadScript(src, callback) {
+                const script = document.createElement('script');
+                script.src = src;
+                script.onload = callback;
+                document.head.appendChild(script);
+            }
+            
+            // Load GSAP in sequence
+            loadScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js', function() {
+                loadScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js', function() {
+                    loadScript('https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js', function() {
+                        // GSAP loaded - ready for animations
+                        document.documentElement.classList.add('gsap-loaded');
+                    });
+                });
+            });
+        })();
+    </script>
+    
 </head>
 <body>
     <div class="page-wrapper">
@@ -59,17 +167,17 @@
 
         <!-- Hero Section -->
         <section id="home" class="hero">
-            <div class="hero-content">
-                <h2 class="hero-title">CINEMATIC STORYTELLING</h2>
-                <p class="hero-subtitle">Professional cinematography across multiple domains</p>
-                <div class="hero-cta">
-                    <a href="#portfolio" class="btn btn-primary">View Work</a>
-                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h2 class="hero-title" id="heroTitle">CINEMATIC STORYTELLING</h2>
+                    <p class="hero-subtitle">I’m Vedang, a storyteller through the lens, building my dream venture — Krishna Photography Studio (KPS).</p>
+                    <div class="hero-cta">
+                        <a href="#portfolio" class="btn btn-primary">View Work</a>
+                        <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                    </div>
                 </div>
-            </div>
-            <div class="hero-image">
-                <div class="image-placeholder">
-                    <p>Hero Video Showcase<br>Replace with stunning cinematography reel</p>
+                <div class="hero-image">
+                    <img src="./images/weddings/KPS-34.jpg" alt="Professional cinematography showcase - beautiful wedding couple" loading="eager" decoding="async">
                 </div>
             </div>
         </section>
@@ -86,26 +194,38 @@
                 
                 <div class="portfolio-grid">
                     <div class="portfolio-item performance-critical" data-category="weddings">
-                        <div class="portfolio-image">
-                            <div class="portfolio-carousel">
+                        <div class="portfolio-carousel" data-category="weddings">
+                            <div class="carousel-container">
                                 <div class="carousel-slide active">
                                     <img src="./images/weddings/KPS-34.jpg" alt="Beautiful Indian wedding couple during ceremony with flower petals" loading="lazy" decoding="async">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img src="./images/weddings/KPS-51.jpg" alt="Bride with haldi ceremony and family blessings" loading="lazy" decoding="async">
+                                    <img src="./images/weddings/KPS-29.jpg" alt="Wedding ceremony moments" loading="lazy" decoding="async">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img src="./images/weddings/KPS-58.jpg" alt="Happy couple during haldi ceremony with traditional decorations" loading="lazy" decoding="async">
+                                    <img src="./images/weddings/KPS-33.jpg" alt="Wedding photography highlights" loading="lazy" decoding="async">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img src="./images/weddings/KPS-63.jpg" alt="Romantic couple dancing under fairy lights at night" loading="lazy" decoding="async">
+                                    <img src="./images/weddings/KPS-42.jpg" alt="Wedding couple portraits" loading="lazy" decoding="async">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img src="./images/weddings/KPS-67.jpg" alt="Silhouette of couple under starry sky during wedding ceremony" loading="lazy" decoding="async">
+                                    <img src="./images/weddings/KPS-67.jpg" alt="Wedding celebration moments" loading="lazy" decoding="async">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img src="./images/weddings/KPS.jpg" alt="Wedding couple portrait with traditional outfits and garlands" loading="lazy" decoding="async">
+                                    <img src="./images/weddings/KPS-45.jpg" alt="Wedding cinematography showcase" loading="lazy" decoding="async">
                                 </div>
+                            </div>
+                            <div class="carousel-controls">
+                                <button class="carousel-btn prev" aria-label="Previous image">‹</button>
+                                <button class="carousel-btn next" aria-label="Next image">›</button>
+                            </div>
+                            <div class="carousel-indicators">
+                                <span class="indicator active" data-slide="0"></span>
+                                <span class="indicator" data-slide="1"></span>
+                                <span class="indicator" data-slide="2"></span>
+                                <span class="indicator" data-slide="3"></span>
+                                <span class="indicator" data-slide="4"></span>
+                                <span class="indicator" data-slide="5"></span>
                             </div>
                         </div>
                         <div class="portfolio-content">
@@ -116,26 +236,38 @@
                     </div>
 
                     <div class="portfolio-item performance-critical" data-category="events">
-                        <div class="portfolio-image">
-                            <div class="portfolio-carousel">
+                        <div class="portfolio-carousel" data-category="events">
+                            <div class="carousel-container">
                                 <div class="carousel-slide active">
                                     <img src="./images/events/P1022542.jpg" alt="Professional event staging and presentation" loading="lazy" decoding="async">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img src="../images/events/P1022538.jpg" alt="Event coverage and professional photography" loading="lazy" decoding="async">
+                                    <img src="./images/events/P1022496.jpg" alt="Event photography highlights" loading="lazy" decoding="async">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img src="../images/events/P1160793.jpg" alt="Dynamic event photography and documentation" loading="lazy" decoding="async">
+                                    <img src="./images/events/P1160786-1.jpg" alt="Corporate event coverage" loading="lazy" decoding="async">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img src="./images/events/P1160770.jpg" alt="Event lighting and stage photography" loading="lazy" decoding="async">
+                                    <img src="./images/events/P1160829.jpg" alt="Live event cinematography" loading="lazy" decoding="async">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img src="./images/events/P1160786-1.jpg" alt="Professional event documentation and coverage" loading="lazy" decoding="async">
+                                    <img src="./images/events/P1160770.jpg" alt="Professional event moments" loading="lazy" decoding="async">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img src="../images/events/P1022496.jpg" alt="Live event coverage and documentation" loading="lazy" decoding="async">
+                                    <img src="./images/events/P1160793.jpg" alt="Event documentation excellence" loading="lazy" decoding="async">
                                 </div>
+                            </div>
+                            <div class="carousel-controls">
+                                <button class="carousel-btn prev" aria-label="Previous image">‹</button>
+                                <button class="carousel-btn next" aria-label="Next image">›</button>
+                            </div>
+                            <div class="carousel-indicators">
+                                <span class="indicator active" data-slide="0"></span>
+                                <span class="indicator" data-slide="1"></span>
+                                <span class="indicator" data-slide="2"></span>
+                                <span class="indicator" data-slide="3"></span>
+                                <span class="indicator" data-slide="4"></span>
+                                <span class="indicator" data-slide="5"></span>
                             </div>
                         </div>
                         <div class="portfolio-content">
@@ -147,17 +279,7 @@
 
                     <div class="portfolio-item performance-critical" data-category="corporate">
                         <div class="portfolio-image">
-                            <div class="portfolio-carousel">
-                                <div class="carousel-slide active">
-                                    <img src="" alt="Corporate photography and business events" loading="lazy" decoding="async">
-                                </div>
-                                <div class="carousel-slide">
-                                    <img src="" alt="Professional corporate documentation" loading="lazy" decoding="async">
-                                </div>
-                                <div class="carousel-slide">
-                                    <img src="" alt="Corporate event coverage and portraits" loading="lazy" decoding="async">
-                                </div>
-                            </div>
+                            <img src="./images/weddings/KPS-29.jpg" alt="Corporate photography and business events" loading="lazy" decoding="async">
                         </div>
                         <div class="portfolio-content">
                             <h3 class="portfolio-title">CORPORATE</h3>
@@ -167,26 +289,38 @@
                     </div>
 
                     <div class="portfolio-item performance-critical" data-category="concerts">
-                        <div class="portfolio-image">
-                            <div class="portfolio-carousel">
+                        <div class="portfolio-carousel" data-category="concerts">
+                            <div class="carousel-container">
                                 <div class="carousel-slide active">
                                     <img src="./images/concerts/P1110229.jpg" alt="Live concert performance with dramatic stage lighting" loading="lazy" decoding="async">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img src="./images/concerts/P1110247.jpg" alt="Concert stage with atmospheric lighting effects" loading="lazy" decoding="async">
+                                    <img src="./images/concerts/P1110247.jpg" alt="Concert stage performance" loading="lazy" decoding="async">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img src="./images/concerts/P1110591.jpg" alt="Live music performance on illuminated stage" loading="lazy" decoding="async">
+                                    <img src="./images/concerts/P1120087.jpg" alt="Musical performance cinematography" loading="lazy" decoding="async">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img src="./images/concerts/P1120087.jpg" alt="Concert venue with audience and dynamic stage setup" loading="lazy" decoding="async">
+                                    <img src="./images/concerts/1744036484455.jpg" alt="Live music event coverage" loading="lazy" decoding="async">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img src="./images/concerts/P1120654.jpg" alt="Musical performance with vibrant stage lighting" loading="lazy" decoding="async">
+                                    <img src="./images/concerts/1744036484475.jpg" alt="Concert lighting and atmosphere" loading="lazy" decoding="async">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img src="./images/concerts/1744036484455.jpg" alt="Concert performer on stage with professional lighting" loading="lazy" decoding="async">
+                                    <img src="./images/concerts/P1120654.jpg" alt="Professional concert photography" loading="lazy" decoding="async">
                                 </div>
+                            </div>
+                            <div class="carousel-controls">
+                                <button class="carousel-btn prev" aria-label="Previous image">‹</button>
+                                <button class="carousel-btn next" aria-label="Next image">›</button>
+                            </div>
+                            <div class="carousel-indicators">
+                                <span class="indicator active" data-slide="0"></span>
+                                <span class="indicator" data-slide="1"></span>
+                                <span class="indicator" data-slide="2"></span>
+                                <span class="indicator" data-slide="3"></span>
+                                <span class="indicator" data-slide="4"></span>
+                                <span class="indicator" data-slide="5"></span>
                             </div>
                         </div>
                         <div class="portfolio-content">
@@ -198,17 +332,7 @@
 
                     <div class="portfolio-item performance-critical" data-category="product">
                         <div class="portfolio-image">
-                            <div class="portfolio-carousel">
-                                <div class="carousel-slide active">
-                                    <img src="" alt="Product photography and commercial shoots" loading="lazy" decoding="async">
-                                </div>
-                                <div class="carousel-slide">
-                                    <img src="" alt="Professional product documentation" loading="lazy" decoding="async">
-                                </div>
-                                <div class="carousel-slide">
-                                    <img src="" alt="Commercial product photography" loading="lazy" decoding="async">
-                                </div>
-                            </div>
+                            <img src="./images/weddings/KPS-33.jpg" alt="Product photography and commercial shoots" loading="lazy" decoding="async">
                         </div>
                         <div class="portfolio-content">
                             <h3 class="portfolio-title">PRODUCT</h3>
@@ -218,26 +342,38 @@
                     </div>
 
                     <div class="portfolio-item performance-critical" data-category="food">
-                        <div class="portfolio-image">
-                            <div class="portfolio-carousel">
+                        <div class="portfolio-carousel" data-category="food">
+                            <div class="carousel-container">
                                 <div class="carousel-slide active">
                                     <img src="./images/food/Paneer Final 1.jpg" alt="Delicious paneer dish with rich garnishing" loading="lazy" decoding="async">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img src="./images/food/SAVE_20240623_200605.jpg" alt="Beautifully plated food dish" loading="lazy" decoding="async">
+                                    <img src="./images/food/SAVE_20240629_110258.jpg" alt="Food photography excellence" loading="lazy" decoding="async">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img src="./images/food/SAVE_20240629_110258.jpg" alt="Fine dining food photography" loading="lazy" decoding="async">
+                                    <img src="./images/food/SAVE_20240629_110335.jpg" alt="Culinary art photography" loading="lazy" decoding="async">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img src="./images/food/SAVE_20240629_110316.jpg" alt="Professional culinary photography" loading="lazy" decoding="async">
+                                    <img src="./images/food/SAVE_20240629_110449.jpg" alt="Professional food styling" loading="lazy" decoding="async">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img src="./images/food/SAVE_20240629_110335.jpg" alt="Appetizing food styling and presentation" loading="lazy" decoding="async">
+                                    <img src="./images/food/SAVE_20240630_170253.jpg" alt="Gourmet food presentation" loading="lazy" decoding="async">
                                 </div>
                                 <div class="carousel-slide">
-                                    <img src="./images/food/SAVE_20240629_110410.jpg" alt="Professional food photography with perfect lighting" loading="lazy" decoding="async">
+                                    <img src="./images/food/SAVE_20240703_210458.jpg" alt="Food cinematography showcase" loading="lazy" decoding="async">
                                 </div>
+                            </div>
+                            <div class="carousel-controls">
+                                <button class="carousel-btn prev" aria-label="Previous image">‹</button>
+                                <button class="carousel-btn next" aria-label="Next image">›</button>
+                            </div>
+                            <div class="carousel-indicators">
+                                <span class="indicator active" data-slide="0"></span>
+                                <span class="indicator" data-slide="1"></span>
+                                <span class="indicator" data-slide="2"></span>
+                                <span class="indicator" data-slide="3"></span>
+                                <span class="indicator" data-slide="4"></span>
+                                <span class="indicator" data-slide="5"></span>
                             </div>
                         </div>
                         <div class="portfolio-content">
@@ -249,17 +385,7 @@
 
                     <div class="portfolio-item performance-critical" data-category="advertisement">
                         <div class="portfolio-image">
-                            <div class="portfolio-carousel">
-                                <div class="carousel-slide active">
-                                    <img src="" alt="Advertisement and commercial photography" loading="lazy" decoding="async">
-                                </div>
-                                <div class="carousel-slide">
-                                    <img src="" alt="Social media and television commercial production" loading="lazy" decoding="async">
-                                </div>
-                                <div class="carousel-slide">
-                                    <img src="" alt="Professional advertisement and marketing photography" loading="lazy" decoding="async">
-                                </div>
-                            </div>
+                            <img src="./images/weddings/KPS-42.jpg" alt="Advertisement and commercial photography" loading="lazy" decoding="async">
                         </div>
                         <div class="portfolio-content">
                             <h3 class="portfolio-title">ADVERTISEMENT</h3>
@@ -299,9 +425,7 @@
                         </div>
                     </div>
                     <div class="about-image">
-                        <div class="image-placeholder">
-                            <p>Professional Portrait<br>Replace with cinematographer's image</p>
-                        </div>
+                        <img src="./images/weddings/KPS-67.jpg" alt="Professional cinematographer at work" loading="lazy" decoding="async">
                     </div>
                 </div>
             </div>
@@ -383,10 +507,36 @@
         </footer>
     </div>
 
-    <script src="js/gsap-animations-optimized.js"></script>
-    <script src="js/main-optimized.js"></script>
-    <script src="js/performance-optimizer.js"></script>
-    <script src="js/contact.js"></script>
+    <!-- Optimized JavaScript Loading -->
+    <script>
+        // Critical scripts loader
+        (function() {
+            const scripts = [
+                { src: 'js/performance-advanced.js', critical: true },
+                { src: 'js/gsap-animations-optimized.js', defer: true },
+                { src: 'js/main-optimized.js', defer: true },
+                { src: 'js/carousel.js', defer: true },
+                { src: 'js/performance-optimizer.js', defer: false },
+                { src: 'js/contact.js', defer: true }
+            ];
+            
+            // Load scripts based on priority
+            scripts.forEach((script, index) => {
+                const scriptEl = document.createElement('script');
+                scriptEl.src = script.src;
+                
+                if (script.critical) {
+                    document.head.appendChild(scriptEl);
+                } else if (script.defer) {
+                    scriptEl.defer = true;
+                    document.body.appendChild(scriptEl);
+                } else {
+                    // Load immediately
+                    document.body.appendChild(scriptEl);
+                }
+            });
+        })();
+    </script>
     
     <!-- Service Worker Registration -->
     <script>
@@ -412,11 +562,25 @@
             });
         }
         
-        // Performance monitoring
+        // Performance monitoring and optimization
         window.addEventListener('load', () => {
-            // Measure and log page performance
-            const loadTime = performance.timing.loadEventEnd - performance.timing.navigationStart;
-            console.log(`Page load time: ${loadTime}ms`);
+            // Wait a bit for load event to complete
+            setTimeout(() => {
+                const navigationStart = performance.timing.navigationStart;
+                const loadEventEnd = performance.timing.loadEventEnd || performance.now() + navigationStart;
+                const loadTime = loadEventEnd - navigationStart;
+                
+                if (loadTime > 0 && loadTime < 60000) { // Valid range: 0-60 seconds
+                    console.log(`Page load time: ${loadTime}ms`);
+                    
+                    // Performance optimization based on load time
+                    if (loadTime > 3000) {
+                        document.documentElement.classList.add('slow-connection');
+                    }
+                } else {
+                    console.log(`Page loaded (timing unavailable)`);
+                }
+            }, 100);
             
             // Check for Largest Contentful Paint
             if ('PerformanceObserver' in window) {
@@ -424,6 +588,12 @@
                     for (const entry of list.getEntries()) {
                         if (entry.entryType === 'largest-contentful-paint') {
                             console.log(`LCP: ${entry.startTime}ms`);
+                            
+                            // Optimize based on LCP
+                            if (entry.startTime > 2500) {
+                                // Slow LCP - enable aggressive optimizations
+                                document.documentElement.classList.add('optimize-aggressive');
+                            }
                         }
                     }
                 });

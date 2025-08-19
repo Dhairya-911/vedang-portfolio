@@ -87,45 +87,51 @@ class GSAPAnimationsOptimized {
         const heroSubtitle = document.querySelector('.hero-subtitle');
         const heroButtons = document.querySelectorAll('.hero-cta .btn');
 
+        console.log('Hero elements found:', {
+            title: !!heroTitle,
+            subtitle: !!heroSubtitle,
+            buttons: heroButtons.length
+        });
+
+        // Set initial state for all hero elements
+        if (heroTitle) gsap.set(heroTitle, { y: this.isMobile ? 30 : 50, opacity: 0 });
+        if (heroSubtitle) gsap.set(heroSubtitle, { y: this.isMobile ? 30 : 50, opacity: 0 });
+        heroButtons.forEach(btn => gsap.set(btn, { y: this.isMobile ? 30 : 50, opacity: 0 }));
+
         // Simple stagger animation
         const heroElements = [heroTitle, heroSubtitle, ...heroButtons].filter(Boolean);
         
         if (heroElements.length > 0) {
-            gsap.fromTo(heroElements, 
-                {
-                    y: this.isMobile ? 30 : 50,
-                    opacity: 0
-                },
-                {
-                    y: 0,
-                    opacity: 1,
-                    duration: this.isMobile ? 0.8 : 1.2,
-                    stagger: 0.2,
-                    ease: "power2.out",
-                    delay: 0.3
+            gsap.to(heroElements, {
+                y: 0,
+                opacity: 1,
+                duration: this.isMobile ? 0.8 : 1.2,
+                stagger: 0.2,
+                ease: "power2.out",
+                delay: 0.3,
+                onComplete: () => {
+                    console.log('✅ Hero animations completed');
                 }
-            );
+            });
+        } else {
+            console.warn('⚠️ No hero elements found for animation');
         }
     }
 
     // Optimized scroll-based animations
     initScrollBasedAnimations() {
-        // Gallery items animation with intersection observer fallback
-        const galleryItems = document.querySelectorAll('.gallery-item');
+        // Disable gallery animations during scroll for performance
+        // Use lightweight intersection observer instead
+        const galleryItems = document.querySelectorAll('.portfolio-item');
         
         if (galleryItems.length > 0) {
-            if (this.isMobile) {
-                // Use intersection observer for mobile
-                this.initIntersectionObserver(galleryItems);
-            } else {
-                // Use ScrollTrigger for desktop
-                this.initScrollTriggerGallery(galleryItems);
-            }
+            // Always use intersection observer for better performance
+            this.initIntersectionObserver(galleryItems);
         }
 
-        // About section animation
+        // Simplified about section animation
         const aboutSection = document.querySelector('#about');
-        if (aboutSection) {
+        if (aboutSection && !this.isMobile) {
             gsap.fromTo(aboutSection.children,
                 {
                     y: 30,
@@ -140,7 +146,7 @@ class GSAPAnimationsOptimized {
                         trigger: aboutSection,
                         start: "top 80%",
                         end: "bottom 20%",
-                        toggleActions: "play none none reverse"
+                        toggleActions: "play none none none"
                     }
                 }
             );
@@ -230,8 +236,12 @@ class GSAPAnimationsOptimized {
     static measurePerformance() {
         const perfData = performance.getEntriesByType('navigation')[0];
         console.log('🔍 Performance Metrics:');
-        console.log(`Page Load Time: ${perfData.loadEventEnd - perfData.navigationStart}ms`);
-        console.log(`DOM Ready: ${perfData.domContentLoadedEventEnd - perfData.navigationStart}ms`);
+        
+        const loadTime = perfData.loadEventEnd - perfData.navigationStart;
+        const domTime = perfData.domContentLoadedEventEnd - perfData.navigationStart;
+        
+        console.log(`Page Load Time: ${loadTime > 0 ? loadTime : 'N/A'}ms`);
+        console.log(`DOM Ready: ${domTime > 0 ? domTime : 'N/A'}ms`);
         
         // Monitor FPS
         let lastTime = performance.now();
