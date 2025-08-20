@@ -217,7 +217,7 @@ h1, h2, h3 {
         opacity: 0;
         transform: translateY(40px);
         animation: heroFadeIn 1.2s cubic-bezier(.77,0,.175,1) 0.2s forwards;
-    }
+/* Remove stray closing brace to fix CSS syntax */
 }
 
 @keyframes heroFadeIn {
@@ -2244,24 +2244,25 @@ body.loaded .reveal-element {
         min-width: 200px;
     }
 
-    .contact-item,
-    .stat-item {
-        padding: 1rem 0.8rem;
+    /* Center contact section items for all devices */
+    .contact-section,
+    .contact-section .section-header,
+    .contact-section .contact-block,
+    .contact-section .contact-social {
+        text-align: center;
+        align-items: center;
+        justify-content: center;
     }
-
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-        padding: 0.9rem;
-        font-size: 15px;
+    .contact-section .contact-block {
+        margin-left: auto;
+        margin-right: auto;
     }
-}
-
-/* Landscape Mobile Optimization */
-@media (max-width: 768px) and (orientation: landscape) {
-    .hero {
-        padding: 80px 1rem 60px;
-        min-height: 100vh;
+    .contact-section .contact-social a {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 1rem;
+    }
     }
 
     .hero-title {
