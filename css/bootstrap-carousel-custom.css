@@ -1,0 +1,262 @@
+/* Bootstrap Carousel Customization for Portfolio - High Specificity */
+
+/* Portfolio carousel container styling */
+.portfolio-item .carousel.slide {
+    border-radius: 15px !important;
+    overflow: hidden !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+    background: #000 !important;
+    position: relative !important;
+    height: 300px !important; /* Fixed height for container */
+}
+
+/* Carousel images */
+.portfolio-item .carousel-inner {
+    border-radius: 15px !important;
+    height: 100% !important; /* Full height of container */
+}
+
+.portfolio-item .carousel-item {
+    transition: transform 0.6s ease-in-out !important;
+    height: 100% !important; /* Full height of carousel */
+}
+
+.portfolio-item .carousel-item img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+    border-radius: 15px !important;
+    display: block !important; /* Force display */
+    opacity: 1 !important; /* Force opacity */
+    visibility: visible !important; /* Force visibility */
+}
+
+/* Custom control buttons */
+.portfolio-item .carousel-control-prev,
+.portfolio-item .carousel-control-next {
+    width: 45px;
+    height: 45px;
+    background: rgba(212, 210, 167, 0.9);
+    border-radius: 50%;
+    border: none;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all 0.3s ease;
+    opacity: 0;
+    backdrop-filter: blur(10px);
+}
+
+.portfolio-item:hover .carousel-control-prev,
+.portfolio-item:hover .carousel-control-next {
+    opacity: 1;
+}
+
+.portfolio-item .carousel-control-prev {
+    left: 15px;
+}
+
+.portfolio-item .carousel-control-next {
+    right: 15px;
+}
+
+.portfolio-item .carousel-control-prev:hover,
+.portfolio-item .carousel-control-next:hover {
+    background: rgba(212, 210, 167, 1);
+    transform: translateY(-50%) scale(1.1);
+}
+
+/* Custom control icons */
+.portfolio-item .carousel-control-prev-icon,
+.portfolio-item .carousel-control-next-icon {
+    width: 20px;
+    height: 20px;
+    background-size: 20px;
+    filter: invert(1);
+}
+
+/* Custom indicators */
+.portfolio-item .carousel-indicators {
+    bottom: 15px;
+    margin-bottom: 0;
+    gap: 8px;
+}
+
+.portfolio-item .carousel-indicators button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    background: transparent;
+    margin: 0;
+    transition: all 0.3s ease;
+}
+
+.portfolio-item .carousel-indicators button.active {
+    background: #d4d2a7;
+    border-color: #d4d2a7;
+    transform: scale(1.2);
+}
+
+.portfolio-item .carousel-indicators button:hover {
+    border-color: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Smooth transitions */
+.carousel-item-next.carousel-item-start,
+.carousel-item-prev.carousel-item-end {
+    transform: translateX(0);
+}
+
+.carousel-item-next,
+.active.carousel-item-end {
+    transform: translateX(100%);
+}
+
+.carousel-item-prev,
+.active.carousel-item-start {
+    transform: translateX(-100%);
+}
+
+/* Auto-pause on hover - Bootstrap handles this automatically with data-bs-pause="hover" */
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .portfolio-item .carousel {
+        height: 250px;
+    }
+    
+    .portfolio-item .carousel-item {
+        height: 100%;
+    }
+    
+    .portfolio-item .carousel-item img {
+        height: 100% !important;
+    }
+    
+    .portfolio-item .carousel-control-prev,
+    .portfolio-item .carousel-control-next {
+        width: 40px;
+        height: 40px;
+        opacity: 1; /* Always visible on mobile */
+    }
+    
+    .portfolio-item .carousel-control-prev {
+        left: 10px;
+    }
+    
+    .portfolio-item .carousel-control-next {
+        right: 10px;
+    }
+    
+    .portfolio-item .carousel-indicators {
+        bottom: 10px;
+    }
+    
+    .portfolio-item .carousel-indicators button {
+        width: 10px;
+        height: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .portfolio-item .carousel {
+        height: 220px;
+    }
+    
+    .portfolio-item .carousel-item {
+        height: 100%;
+    }
+    
+    .portfolio-item .carousel-item img {
+        height: 100% !important;
+    }
+    
+    .portfolio-item .carousel-control-prev,
+    .portfolio-item .carousel-control-next {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .portfolio-item .carousel-control-prev-icon,
+    .portfolio-item .carousel-control-next-icon {
+        width: 16px;
+        height: 16px;
+        background-size: 16px;
+    }
+}
+
+/* Loading animation */
+.carousel-item img {
+    transition: opacity 0.3s ease;
+    background-color: #1a1a1a; /* Fallback background if image doesn't load */
+}
+
+.carousel-item img[loading="lazy"] {
+    opacity: 1; /* Changed from 0 to 1 to show images immediately */
+}
+
+.carousel-item img[loading="lazy"].loaded {
+    opacity: 1;
+}
+
+/* Image loading error handling */
+.carousel-item img::before {
+    content: "Loading...";
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #d4d2a7;
+    font-size: 1rem;
+}
+
+/* Focus styles for accessibility */
+.portfolio-item .carousel-control-prev:focus,
+.portfolio-item .carousel-control-next:focus,
+.portfolio-item .carousel-indicators button:focus {
+    outline: 2px solid #d4d2a7;
+    outline-offset: 2px;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .carousel-item {
+        transition: none;
+    }
+    
+    .portfolio-item .carousel-control-prev,
+    .portfolio-item .carousel-control-next {
+        transition: none;
+    }
+    
+    .portfolio-item .carousel-indicators button {
+        transition: none;
+    }
+}
+
+/* Performance optimizations */
+.carousel-inner {
+    will-change: transform;
+}
+
+.carousel-item {
+    will-change: transform;
+}
+
+/* Print styles */
+@media print {
+    .portfolio-item .carousel-control-prev,
+    .portfolio-item .carousel-control-next,
+    .portfolio-item .carousel-indicators {
+        display: none;
+    }
+    
+    .portfolio-item .carousel-item:not(.active) {
+        display: block;
+        position: static;
+        transform: none;
+    }
+}

@@ -2,15 +2,22 @@
 class PortfolioCarousel {
     constructor() {
         this.carousels = new Map();
-        this.autoSlideInterval = 2500; // 2.5 seconds
+        this.autoSlideInterval = 3000; // 3 seconds for better visibility
         this.init();
     }
 
     init() {
+        console.log('🎠 Initializing Portfolio Carousel...');
         // Initialize all carousels
-        document.querySelectorAll('.portfolio-carousel').forEach(carousel => {
+        const carouselElements = document.querySelectorAll('.portfolio-carousel');
+        console.log(`🔍 Found ${carouselElements.length} carousel elements`);
+        
+        carouselElements.forEach((carousel, index) => {
+            console.log(`🎪 Setting up carousel ${index + 1}: ${carousel.dataset.category}`);
             this.setupCarousel(carousel);
         });
+        
+        console.log(`✅ Carousel initialization complete. Active carousels: ${this.carousels.size}`);
     }
 
     setupCarousel(carousel) {
@@ -142,12 +149,12 @@ class PortfolioCarousel {
         carouselData.autoSlideTimer = setInterval(() => {
             if (carouselData.isPlaying && !document.hidden) {
                 this.nextSlide(carouselData);
-                console.log(`🎠 Auto-slide: ${carouselData.element.dataset.category} -> slide ${carouselData.currentSlide}`);
+                console.log(`🎠 Auto-slide: ${carouselData.element.dataset.category} -> slide ${carouselData.currentSlide + 1}/${carouselData.totalSlides}`);
             }
         }, this.autoSlideInterval);
 
         carouselData.isPlaying = true;
-        console.log(`▶️ Auto-slide started for ${carouselData.element.dataset.category}`);
+        console.log(`▶️ Auto-slide started for ${carouselData.element.dataset.category} (${this.autoSlideInterval}ms interval)`);
     }
 
     pauseAutoSlide(carouselData) {
