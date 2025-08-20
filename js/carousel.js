@@ -203,18 +203,24 @@ class PortfolioCarousel {
 
 // Initialize carousel when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-    const portfolioCarousel = new PortfolioCarousel();
-    
-    // Setup visibility change listener
-    document.addEventListener('visibilitychange', () => {
-        portfolioCarousel.handleVisibilityChange();
-    });
-    
-    // Initialize intersection observer for performance
-    portfolioCarousel.initIntersectionObserver();
-    
-    // Make it globally available
-    window.portfolioCarousel = portfolioCarousel;
+    // Add a small delay to ensure all CSS is loaded
+    setTimeout(() => {
+        const portfolioCarousel = new PortfolioCarousel();
+        
+        // Setup visibility change listener
+        document.addEventListener('visibilitychange', () => {
+            portfolioCarousel.handleVisibilityChange();
+        });
+        
+        // Initialize intersection observer for performance
+        portfolioCarousel.initIntersectionObserver();
+        
+        // Make it globally available
+        window.portfolioCarousel = portfolioCarousel;
+        
+        // Debug log
+        console.log('🎠 Portfolio Carousel initialized with', portfolioCarousel.carousels.size, 'carousels');
+    }, 100);
 });
 
 // Preload carousel images for better performance
