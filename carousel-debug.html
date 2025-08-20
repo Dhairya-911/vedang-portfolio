@@ -41,6 +41,8 @@
         <div class="debug-info">
             <h3>Debug Console:</h3>
             <div id="debugOutput"></div>
+            <button onclick="testAutoSlide()" style="margin: 10px 0; padding: 8px 16px; background: #007acc; color: white; border: none; border-radius: 4px; cursor: pointer;">🔄 Test Auto-Slide</button>
+            <button onclick="clearDebug()" style="margin: 10px 0; padding: 8px 16px; background: #666; color: white; border: none; border-radius: 4px; cursor: pointer;">🗑️ Clear Log</button>
         </div>
 
         <div class="portfolio-item">
@@ -136,6 +138,44 @@
         window.addEventListener('error', function(e) {
             addDebugMessage(`❌ JavaScript Error: ${e.message} at ${e.filename}:${e.lineno}`, 'error');
         });
+
+        // Test auto-slide function
+        window.testAutoSlide = function() {
+            addDebugMessage('🧪 Testing auto-slide manually...', 'warning');
+            if (window.portfolioCarousel) {
+                window.portfolioCarousel.carousels.forEach((carouselData, category) => {
+                    const status = `${category}: playing=${carouselData.isPlaying}, timer=${carouselData.autoSlideTimer ? 'active' : 'inactive'}`;
+                    addDebugMessage(status, 'info');
+                    
+                    if (!carouselData.isPlaying) {
+                        window.portfolioCarousel.startAutoSlide(carouselData);
+                        addDebugMessage(`🔄 Restarted auto-slide for ${category}`, 'success');
+                    }
+                });
+            } else {
+                addDebugMessage('❌ Portfolio carousel not found', 'error');
+            }
+        };
+
+        // Clear debug log
+        window.clearDebug = function() {
+            debugOutput.innerHTML = '';
+        };
+
+        // Monitor carousel changes
+        setInterval(() => {
+            if (window.portfolioCarousel) {
+                window.portfolioCarousel.carousels.forEach((carouselData, category) => {
+                    const activeSlide = carouselData.element.querySelector('.carousel-slide.active');
+                    if (activeSlide) {
+                        const slideIndex = Array.from(carouselData.slides).indexOf(activeSlide);
+                        if (slideIndex !== carouselData.currentSlide) {
+                            addDebugMessage(`📸 ${category} changed to slide ${slideIndex}`, 'success');
+                        }
+                    }
+                });
+            }
+        }, 1000);
     </script>
 </body>
 </html>

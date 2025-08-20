@@ -38,16 +38,19 @@ class PortfolioCarousel {
         // Setup event listeners
         this.setupEventListeners(carouselData, prevBtn, nextBtn);
 
-        // Start auto-slide
+        // Start auto-slide immediately
         this.startAutoSlide(carouselData);
+        console.log(`🎠 Carousel setup complete for ${category} with ${slides.length} slides`);
 
         // Pause on hover
         carousel.addEventListener('mouseenter', () => {
             this.pauseAutoSlide(carouselData);
+            console.log(`⏸️ Paused auto-slide for ${category} (hover)`);
         });
 
         carousel.addEventListener('mouseleave', () => {
             this.startAutoSlide(carouselData);
+            console.log(`▶️ Resumed auto-slide for ${category} (hover end)`);
         });
     }
 
@@ -130,17 +133,21 @@ class PortfolioCarousel {
     }
 
     startAutoSlide(carouselData) {
+        // Clear any existing timer
         if (carouselData.autoSlideTimer) {
             clearInterval(carouselData.autoSlideTimer);
         }
 
+        // Start new timer
         carouselData.autoSlideTimer = setInterval(() => {
-            if (carouselData.isPlaying) {
+            if (carouselData.isPlaying && !document.hidden) {
                 this.nextSlide(carouselData);
+                console.log(`🎠 Auto-slide: ${carouselData.element.dataset.category} -> slide ${carouselData.currentSlide}`);
             }
         }, this.autoSlideInterval);
 
         carouselData.isPlaying = true;
+        console.log(`▶️ Auto-slide started for ${carouselData.element.dataset.category}`);
     }
 
     pauseAutoSlide(carouselData) {
@@ -175,6 +182,10 @@ class PortfolioCarousel {
 
     // Initialize intersection observer to pause off-screen carousels
     initIntersectionObserver() {
+        // Temporarily disabled to debug auto-slide issues
+        console.log('🔍 Intersection observer disabled for debugging');
+        return;
+        
         if ('IntersectionObserver' in window) {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -184,13 +195,15 @@ class PortfolioCarousel {
                     if (carouselData) {
                         if (entry.isIntersecting) {
                             this.startAutoSlide(carouselData);
+                            console.log(`👁️ ${category} carousel is visible - starting auto-slide`);
                         } else {
                             this.pauseAutoSlide(carouselData);
+                            console.log(`👁️ ${category} carousel is hidden - pausing auto-slide`);
                         }
                     }
                 });
             }, {
-                threshold: 0.3 // Trigger when 30% of carousel is visible
+                threshold: 0.1 // Reduced threshold - trigger when 10% is visible
             });
 
             // Observe all carousels
@@ -220,6 +233,24 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Debug log
         console.log('🎠 Portfolio Carousel initialized with', portfolioCarousel.carousels.size, 'carousels');
+        
+        // Manual test function
+        window.testCarousel = function() {
+            console.log('🧪 Testing carousel auto-slide...');
+            portfolioCarousel.carousels.forEach((carouselData, category) => {
+                console.log(`${category}: isPlaying=${carouselData.isPlaying}, timer=${carouselData.autoSlideTimer ? 'active' : 'inactive'}`);
+                if (!carouselData.isPlaying) {
+                    portfolioCarousel.startAutoSlide(carouselData);
+                    console.log(`🔄 Restarted auto-slide for ${category}`);
+                }
+            });
+        };
+        
+        // Auto-test after 3 seconds
+        setTimeout(() => {
+            console.log('🔍 Auto-testing carousel functionality...');
+            window.testCarousel();
+        }, 3000);
     }, 100);
 });
 
