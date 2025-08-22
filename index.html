@@ -99,6 +99,24 @@
             window.addEventListener('resize', setVH);
         })();
     </script>
+
+            <!-- Performance: ensure images default to lazy loading if not specified -->
+            <script>
+                (function(){
+                    if ('loading' in HTMLImageElement.prototype) {
+                        document.addEventListener('DOMContentLoaded', function(){
+                            document.querySelectorAll('img:not([loading])').forEach(img => img.setAttribute('loading','lazy'));
+                        });
+                    } else {
+                        // Fallback: load a lightweight lazyload lib only when needed (skipped to keep bundle small)
+                    }
+                    // Preconnect to local images (helps LCP for self-hosted images)
+                    var link = document.createElement('link');
+                    link.rel = 'preconnect';
+                    link.href = window.location.origin;
+                    document.head.appendChild(link);
+                })();
+            </script>
     
 </head>
 <body>

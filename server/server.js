@@ -20,9 +20,17 @@ app.use(helmet({
 }));
 
 // CORS configuration
-const allowedOrigins = process.env.CORS_ORIGIN 
-    ? process.env.CORS_ORIGIN.split(',') 
-    : ['http://localhost:5500', 'http://127.0.0.1:5500', 'http://localhost:3000'];
+const allowedOrigins = process.env.CORS_ORIGIN
+    ? process.env.CORS_ORIGIN.split(',')
+    : [
+        'http://localhost:5500',
+        'http://127.0.0.1:5500',
+        'http://localhost:8000',
+        'http://127.0.0.1:8000',
+        'http://localhost:3000',
+        'https://vedang-portfolio.vercel.app',
+        'https://vedang-portfolio.onrender.com'
+    ];
 
 app.use(cors({
     origin: function (origin, callback) {

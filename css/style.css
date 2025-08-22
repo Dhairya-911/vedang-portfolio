@@ -132,6 +132,22 @@ h1, h2, h3 {
     text-align: center;
 }
 
+/* Performance helpers: reserve image space to reduce CLS and ensure good defaults */
+.hero-image img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9; /* Reserve space for hero images */
+    display: block;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 3 / 2; /* Typical gallery aspect ratio */
+    object-fit: cover;
+    display: block;
+}
+
 .nav-menu {
     display: flex;
     list-style: none;
