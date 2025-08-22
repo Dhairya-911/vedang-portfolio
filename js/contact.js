@@ -1,13 +1,20 @@
 // Contact Form Handler with MongoDB Integration
 class ContactFormHandler {
     constructor() {
+        console.log('🔧 ContactFormHandler constructor called');
+        
         // Determine API URL based on environment
         this.apiUrl = this.getApiUrl();
+        console.log('🌐 API URL:', this.apiUrl);
+        
         this.form = document.getElementById('contactForm');
         this.submitBtn = document.getElementById('submitBtn');
         this.submitText = document.getElementById('submitText');
         this.submitLoader = document.getElementById('submitLoader');
         this.formStatus = document.getElementById('formStatus');
+        
+        console.log('📝 Form element found:', !!this.form);
+        console.log('🔘 Submit button found:', !!this.submitBtn);
         
         this.init();
     }
@@ -26,7 +33,10 @@ class ContactFormHandler {
     }
 
     init() {
+        console.log('🚀 Initializing contact form handler...');
+        
         if (this.form) {
+            console.log('✅ Adding submit event listener to form');
             this.form.addEventListener('submit', this.handleSubmit.bind(this));
             
             // Real-time validation
@@ -35,16 +45,25 @@ class ContactFormHandler {
                 input.addEventListener('blur', () => this.validateField(input));
                 input.addEventListener('input', () => this.clearFieldError(input));
             });
+            
+            console.log('✅ Form handler initialized successfully');
+        } else {
+            console.error('❌ Contact form not found!');
         }
     }
 
     async handleSubmit(e) {
+        console.log('📤 Form submission started');
         e.preventDefault();
+        console.log('✅ Default form submission prevented');
         
         // Validate form
         if (!this.validateForm()) {
+            console.log('❌ Form validation failed');
             return;
         }
+
+        console.log('✅ Form validation passed');
 
         // Collect form data
         const formData = new FormData(this.form);
@@ -55,9 +74,13 @@ class ContactFormHandler {
             message: formData.get('message').trim()
         };
 
+        console.log('📋 Form data collected:', data);
+
         try {
             this.setSubmitState(true);
             this.hideStatus();
+
+            console.log('🌐 Sending request to:', this.apiUrl);
 
             // Submit to MongoDB backend
             const response = await fetch(this.apiUrl, {
@@ -68,7 +91,10 @@ class ContactFormHandler {
                 body: JSON.stringify(data)
             });
 
+            console.log('📥 Response received:', response.status, response.statusText);
+
             const result = await response.json();
+            console.log('📄 Response data:', result);
 
             if (result.success) {
                 this.showSuccess(result.message);
@@ -88,7 +114,7 @@ class ContactFormHandler {
             }
 
         } catch (error) {
-            console.error('Form submission error:', error);
+            console.error('❌ Form submission error:', error);
             this.showError('Network error. Please check your connection and try again.');
         } finally {
             this.setSubmitState(false);
@@ -285,8 +311,31 @@ class CharacterCounter {
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    new ContactFormHandler();
-    new CharacterCounter();
+    console.log('📄 DOM Content Loaded - Initializing contact form...');
+    
+    try {
+        const contactHandler = new ContactFormHandler();
+        const characterCounter = new CharacterCounter();
+        console.log('✅ Contact form and character counter initialized successfully');
+    } catch (error) {
+        console.error('❌ Error initializing contact form:', error);
+    }
+});
+
+// Also try to initialize on window load as a fallback
+window.addEventListener('load', function() {
+    console.log('🌐 Window loaded - Checking if contact form needs initialization...');
+    
+    // Check if form handler is already initialized
+    if (!window.contactFormHandler) {
+        console.log('🔄 Initializing contact form on window load...');
+        try {
+            window.contactFormHandler = new ContactFormHandler();
+            console.log('✅ Contact form initialized on window load');
+        } catch (error) {
+            console.error('❌ Error initializing contact form on window load:', error);
+        }
+    }
 });
 
 // Add CSS for character counter
