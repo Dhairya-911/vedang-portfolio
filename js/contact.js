@@ -313,11 +313,28 @@ class CharacterCounter {
     }
 }
 
-// Initialize when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    new ContactFormHandler();
-    new CharacterCounter();
-});
+// Initialize contact form and helpers in a way that works whether this
+// script is loaded before or after DOMContentLoaded (handles dynamic loading).
+function initContact() {
+    try {
+        new ContactFormHandler();
+    } catch (e) {
+        console.error('ContactFormHandler init error:', e);
+    }
+
+    try {
+        new CharacterCounter();
+    } catch (e) {
+        // CharacterCounter is optional; fail silently if not present
+    }
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initContact);
+} else {
+    // DOM already ready — initialize immediately
+    initContact();
+}
 
 // Add CSS for character counter and form status
 const counterCSS = `
