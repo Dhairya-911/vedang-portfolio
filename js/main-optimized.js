@@ -5,8 +5,16 @@ class OptimizedPortfolio {
     constructor() {
         this.isMobile = window.innerWidth <= 768;
         this.reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        this.init();
-        this.initHeroTextAnimation();
+        // Ensure DOM is loaded before initializing
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                this.init();
+                this.initHeroTextAnimation();
+            });
+        } else {
+            this.init();
+            this.initHeroTextAnimation();
+        }
     }
 
     init() {
@@ -227,34 +235,49 @@ class OptimizedPortfolio {
             }
         });
 
-        // Smooth scroll for navigation links with GSAP
+        // Smooth scroll for navigation links with GSAP (only for in-page anchors)
         navMenu.addEventListener('click', (e) => {
-            if (e.target.classList.contains('nav-link')) {
-                e.preventDefault();
-                const targetId = e.target.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                if (targetElement) {
-                    const headerHeight = document.querySelector('.header').offsetHeight;
-                    
-                    // Use GSAP ScrollToPlugin for smooth scrolling
-                    gsap.to(window, {
-                        duration: 1.2,
-                        scrollTo: {
-                            y: targetElement,
-                            offsetY: headerHeight
-                        },
-                        ease: "power2.inOut"
-                    });
+            const link = e.target.closest('.nav-link');
+            if (!link) return;
 
-                    // Close mobile menu
-                    if (this.isMobile) {
-                        isMenuOpen = false;
-                        menuToggle.classList.remove('active');
-                        navMenu.classList.remove('active');
-                        document.body.style.overflow = '';
-                    }
+            const href = link.getAttribute('href');
+
+            // If it's an in-page anchor, intercept and smooth-scroll
+            if (href && href.startsWith('#')) {
+                const targetElement = document.querySelector(href);
+                if (!targetElement) return;
+
+                e.preventDefault();
+                const headerHeight = document.querySelector('.header')?.offsetHeight || 0;
+
+                // Use GSAP ScrollToPlugin for smooth scrolling
+                gsap.to(window, {
+                    duration: 1.2,
+                    scrollTo: {
+                        y: targetElement,
+                        offsetY: headerHeight
+                    },
+                    ease: "power2.inOut"
+                });
+
+                // Close mobile menu
+                if (this.isMobile) {
+                    isMenuOpen = false;
+                    menuToggle.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    document.body.style.overflow = '';
                 }
+
+                return;
+            }
+
+            // For regular links (navigate to other pages), allow default navigation
+            // but close the mobile menu so UI resets before navigation.
+            if (this.isMobile) {
+                isMenuOpen = false;
+                menuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+                document.body.style.overflow = '';
             }
         });
     }
