@@ -19,7 +19,7 @@ const validateContact = [
         .withMessage('Please provide a valid email address'),
     
     body('service')
-        .isIn(['weddings', 'events', 'corporate', 'concerts', 'product', 'food', 'advertisement'])
+        .isIn(['weddings', 'events', 'concerts', 'food'])
         .withMessage('Please select a valid service'),
     
     body('message')

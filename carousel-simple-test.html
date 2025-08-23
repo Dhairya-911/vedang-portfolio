@@ -131,6 +131,8 @@
             constructor() {
                 this.carousels = [];
                 this.autoSlideInterval = 2500; // 2.5 seconds
+                // Disable auto-slide by default in test harness
+                this.autoSlideEnabled = false;
                 this.init();
             }
 
@@ -185,10 +187,12 @@
 
                 // Hover events
                 element.addEventListener('mouseenter', () => this.pauseCarousel(carousel));
-                element.addEventListener('mouseleave', () => this.startCarousel(carousel));
+                element.addEventListener('mouseleave', () => {
+                    if (this.autoSlideEnabled) this.startCarousel(carousel);
+                });
 
-                // Start auto-slide
-                this.startCarousel(carousel);
+                // Start auto-slide only if enabled
+                if (this.autoSlideEnabled) this.startCarousel(carousel);
             }
 
             goToSlide(carousel, index) {
@@ -219,6 +223,12 @@
             startCarousel(carousel) {
                 if (carousel.timer) {
                     clearInterval(carousel.timer);
+                }
+
+                // If auto-slide disabled, do nothing
+                if (!this.autoSlideEnabled) {
+                    log(`⛔ Auto-slide disabled for ${carousel.category}`, 'warning');
+                    return;
                 }
 
                 carousel.timer = setInterval(() => {

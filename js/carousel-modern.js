@@ -8,6 +8,8 @@ class ModernCarousel {
             pauseOnHover: true,
             enableSwipe: true
         };
+        // Disable autoplay by default; set to true to enable automatic sliding
+        this.autoSlideEnabled = false;
         this.init();
     }
 
@@ -24,8 +26,8 @@ class ModernCarousel {
 
         console.log(`✅ Successfully initialized ${this.carousels.length} carousels`);
         
-        // Start all carousels
-        this.startAllCarousels();
+    // Do not start carousels automatically when autoSlide is disabled
+    if (this.autoSlideEnabled) this.startAllCarousels();
     }
 
     createCarousel(element, index) {
@@ -189,6 +191,11 @@ class ModernCarousel {
     }
 
     startCarousel(carousel) {
+        if (!this.autoSlideEnabled) {
+            console.log(`⛔ Auto-slide disabled; not starting carousel ${carousel.id}`);
+            return;
+        }
+
         if (carousel.isPlaying || carousel.isPaused) return;
 
         carousel.timer = setInterval(() => {
@@ -208,6 +215,9 @@ class ModernCarousel {
 
     resumeCarousel(carousel) {
         carousel.isPaused = false;
+        if (this.autoSlideEnabled && !carousel.isPlaying) {
+            this.startCarousel(carousel);
+        }
         console.log(`▶️ Resumed: ${carousel.id}`);
     }
 
@@ -222,7 +232,7 @@ class ModernCarousel {
     }
 
     restartTimer(carousel) {
-        if (carousel.isPlaying) {
+        if (this.autoSlideEnabled && carousel.isPlaying) {
             this.stopCarousel(carousel);
             this.startCarousel(carousel);
         }

@@ -2,7 +2,9 @@
 class PortfolioCarousel {
     constructor() {
         this.carousels = new Map();
-        this.autoSlideInterval = 3000; // 3 seconds for better visibility
+        this.autoSlideInterval = 3000; // 3 seconds when enabled
+        // Disable automatic sliding by default. Set to true only if you want autoplay.
+        this.autoSlideEnabled = false;
         this.init();
     }
 
@@ -36,7 +38,8 @@ class PortfolioCarousel {
             currentSlide: 0,
             totalSlides: slides.length,
             autoSlideTimer: null,
-            isPlaying: true
+            // Start in paused/manual mode
+            isPlaying: false
         };
 
         // Store carousel data
@@ -45,9 +48,8 @@ class PortfolioCarousel {
         // Setup event listeners
         this.setupEventListeners(carouselData, prevBtn, nextBtn);
 
-        // Start auto-slide immediately
-        this.startAutoSlide(carouselData);
-        console.log(`🎠 Carousel setup complete for ${category} with ${slides.length} slides`);
+    // Do not start auto-slide by default - manual control only
+    console.log(`🎠 Carousel setup complete for ${category} with ${slides.length} slides (manual mode)`);
 
         // Pause on hover
         carousel.addEventListener('mouseenter', () => {
@@ -55,9 +57,12 @@ class PortfolioCarousel {
             console.log(`⏸️ Paused auto-slide for ${category} (hover)`);
         });
 
+        // Do not auto-resume on mouseleave when autoplay is disabled
         carousel.addEventListener('mouseleave', () => {
-            this.startAutoSlide(carouselData);
-            console.log(`▶️ Resumed auto-slide for ${category} (hover end)`);
+            if (this.autoSlideEnabled) {
+                this.startAutoSlide(carouselData);
+                console.log(`▶️ Resumed auto-slide for ${category} (hover end)`);
+            }
         });
     }
 
@@ -140,6 +145,11 @@ class PortfolioCarousel {
     }
 
     startAutoSlide(carouselData) {
+        if (!this.autoSlideEnabled) {
+            // Autoplay disabled globally
+            console.log(`⛔ Auto-slide is disabled; not starting for ${carouselData.element.dataset.category}`);
+            return;
+        }
         // Clear any existing timer
         if (carouselData.autoSlideTimer) {
             clearInterval(carouselData.autoSlideTimer);
@@ -162,7 +172,8 @@ class PortfolioCarousel {
     }
 
     restartAutoSlide(carouselData) {
-        this.startAutoSlide(carouselData);
+    // Restart only if auto-slide is enabled
+    if (this.autoSlideEnabled) this.startAutoSlide(carouselData);
     }
 
     // Public methods for external control
@@ -253,11 +264,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         };
         
-        // Auto-test after 3 seconds
-        setTimeout(() => {
-            console.log('🔍 Auto-testing carousel functionality...');
-            window.testCarousel();
-        }, 3000);
+    // Auto-test removed to keep carousels manual-only by default
     }, 100);
 });
 

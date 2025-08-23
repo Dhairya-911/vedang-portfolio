@@ -95,11 +95,8 @@ class OptimizedPortfolio {
             <button class="filter-btn active" data-filter="all">All</button>
             <button class="filter-btn" data-filter="weddings">Weddings</button>
             <button class="filter-btn" data-filter="events">Events</button>
-            <button class="filter-btn" data-filter="corporate">Corporate</button>
             <button class="filter-btn" data-filter="concerts">Concerts</button>
-            <button class="filter-btn" data-filter="product">Product</button>
             <button class="filter-btn" data-filter="food">Food</button>
-            <button class="filter-btn" data-filter="advertisement">Advertisement</button>
         `;
 
         portfolioSection.appendChild(filterContainer);

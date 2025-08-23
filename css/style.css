@@ -1154,6 +1154,18 @@ h1, h2, h3 {
         width: 100%;
     }
 
+    /* Ensure contact heading and content are centered on very small screens */
+    .contact .section-title,
+    .contact-info .section-title {
+        text-align: center;
+        margin-left: 0;
+    }
+
+    .contact-content {
+        justify-items: center; /* center grid items horizontally */
+        justify-content: center;
+    }
+
     .btn {
         width: 100%;
         max-width: 300px;
@@ -1494,8 +1506,12 @@ h1, h2, h3 {
     }
 
     .contact-content {
-        gap: 2.5rem;
-        text-align: center;
+    gap: 2.5rem;
+    text-align: center;
+    /* enforce a single-column centered layout */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     }
 
     .contact-form {
@@ -1552,6 +1568,16 @@ h1, h2, h3 {
         text-align: center;
     }
 
+    /* Ensure form and info blocks share the same centered width */
+    .contact-info,
+    .contact-form,
+    .contact-details {
+        width: 100%;
+        max-width: 360px;
+        box-sizing: border-box;
+        margin-left: 0;
+    }
+
     .contact-item h4 {
         font-size: 1rem;
         margin-bottom: 0.5rem;
@@ -1560,6 +1586,40 @@ h1, h2, h3 {
     .contact-item p,
     .contact-item a {
         font-size: 0.85rem;
+    }
+
+    /* Small-contact tweaks: make form and info stack and align cleanly */
+    .contact-content {
+        grid-template-columns: 1fr;
+        align-items: start;
+    }
+
+    .contact-form {
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 0 0.5rem;
+        box-sizing: border-box;
+    }
+
+    .contact-info {
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+
+    /* Make send button full width and centered on very small screens */
+    .contact-form .btn[type="submit"],
+    .contact-form .send-button {
+        width: 100%;
+        max-width: 100%;
+        display: block;
+        margin: 0.75rem 0 0;
+    }
+
+    /* Reduce excessive left/right paddings from contact items */
+    .contact-item {
+        padding-left: 0.85rem;
+        padding-right: 0.85rem;
     }
 
     /* Social links for small screens */
@@ -2174,7 +2234,7 @@ body.loaded .reveal-element {
     .contact-description {
         font-size: 0.9rem;
         max-width: 280px;
-        margin-bottom: 1.5rem;
+    margin: 0 auto 1.5rem;
     }
 
     .contact-details {
@@ -2185,6 +2245,7 @@ body.loaded .reveal-element {
         padding: 1rem;
         max-width: 280px;
         border-radius: 10px;
+    margin: 0.6rem auto;
     }
 
     .contact-item h3 {

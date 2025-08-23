@@ -130,11 +130,8 @@ class OptimizedPortfolio {
             { key: 'all', label: 'All' },
             { key: 'weddings', label: 'Weddings' },
             { key: 'events', label: 'Events' },
-            { key: 'corporate', label: 'Corporate' },
             { key: 'concerts', label: 'Concerts' },
-            { key: 'product', label: 'Product' },
-            { key: 'food', label: 'Food' },
-            { key: 'advertisement', label: 'Advertisement' }
+            { key: 'food', label: 'Food' }
         ];
 
         filters.forEach(filter => {

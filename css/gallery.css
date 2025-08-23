@@ -65,13 +65,58 @@
 
 /* Gallery Grid - Modern Dynamic Layout */
 .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-    grid-auto-rows: 250px;
-    max-width: 1400px;
+    /* Default: Linear stacked layout for older pages or no-grid fallback */
+    display: block;
+    max-width: 900px;
     margin: 0 auto;
     padding: 0 20px;
+}
+
+/* Optional grid variant: 3-column grid where landscape items span full width (1x1) and portrait items occupy one column (1x3 block) */
+.gallery-grid.grid-layout {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    max-width: 1200px;
+    align-items: start;
+}
+
+.gallery-grid.grid-layout .gallery-item {
+    width: auto; /* let grid control sizing */
+    margin: 0;
+}
+
+.gallery-grid.grid-layout .gallery-item.landscape {
+    grid-column: 1 / -1; /* span all 3 columns -> full width */
+}
+
+.gallery-grid.grid-layout .gallery-item.portrait {
+    grid-column: auto; /* occupy a single column */
+}
+
+/* Portrait images: limit height so they don't render 'full-scale' and keep a tidy column look */
+.gallery-grid.grid-layout .gallery-item.portrait img {
+    width: 100%;
+    height: 420px; /* fixed visual height for portrait thumbnails */
+    object-fit: cover; /* fill the box while preserving aspect ratio */
+    display: block;
+}
+
+/* Slightly smaller portrait boxes on small screens */
+@media (max-width: 900px) {
+    .gallery-grid.grid-layout .gallery-item.portrait img {
+        height: 320px;
+    }
+}
+
+@media (max-width: 600px) {
+    /* stack grid on small screens and let portrait images scale naturally */
+    .gallery-grid.grid-layout { grid-template-columns: 1fr; }
+    .gallery-grid.grid-layout .gallery-item.portrait img {
+        height: auto;
+        object-fit: contain;
+        max-width: 100%;
+    }
 }
 
 /* Gallery Items */
@@ -81,13 +126,14 @@
     border-radius: 12px;
     overflow: hidden;
     cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    box-shadow: 0 4px 15px rgba(90, 90, 71, 0.1);
+    transition: all 0.28s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 4px 15px rgba(90, 90, 71, 0.08);
+    /* Linear layout specifics */
+    width: 100%;
+    margin-bottom: 1.25rem;
     /* Performance optimizations */
     transform: translateZ(0);
     will-change: transform, box-shadow;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
 }
 
 .gallery-item:hover {
@@ -95,19 +141,12 @@
     box-shadow: 0 12px 35px rgba(90, 90, 71, 0.25);
 }
 
-.gallery-item.tall {
-    grid-row: span 2;
-}
-
-.gallery-item.wide {
-    grid-column: span 2;
-}
-
-/* Featured item - hero showcase */
+.gallery-item.tall,
+.gallery-item.wide,
 .gallery-item.featured {
-    grid-column: span 2;
-    grid-row: span 3;
-    box-shadow: 0 8px 25px rgba(90, 90, 71, 0.2);
+    /* In linear layout these helpers just act as normal items */
+    width: 100%;
+    margin-bottom: 1.5rem;
 }
 
 .gallery-item.featured:hover {
@@ -117,21 +156,19 @@
 
 .gallery-item .image-placeholder {
     width: 100%;
-    height: 100%;
-    transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+    height: auto;
+    transition: transform 0.45s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .gallery-item img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    height: auto; /* natural aspect preserved */
+    object-fit: contain; /* avoid cropping */
     object-position: center;
-    transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: transform 0.45s cubic-bezier(0.25, 0.8, 0.25, 1);
     /* Performance optimizations */
     transform: translateZ(0);
     will-change: transform;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
 }
 
 .gallery-item:hover .image-placeholder {
@@ -189,36 +226,17 @@
 
 /* Responsive Design */
 @media (max-width: 1200px) {
-    .gallery-grid {
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 1.2rem;
-    }
-    
-    .gallery-item.featured {
-        grid-column: span 2;
-        grid-row: span 2;
-    }
+    .gallery-grid { padding: 0 16px; max-width: 720px; }
 }
 
 @media (max-width: 768px) {
-    .gallery-grid {
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        grid-auto-rows: 220px;
-        gap: 1rem;
-        padding: 0 15px;
-    }
+    .gallery-grid { padding: 0 12px; }
     
     .gallery-item.wide,
-    .gallery-item.featured {
-        grid-column: span 1;
-    }
-    
-    .gallery-item.featured {
-        grid-row: span 2;
-    }
-    
+    .gallery-item.featured,
     .gallery-item.tall {
-        grid-row: span 1;
+        width: 100%;
+        margin-bottom: 1rem;
     }
     
     .gallery-item:hover {
@@ -239,19 +257,11 @@
 }
 
 @media (max-width: 480px) {
-    .gallery-grid {
-        grid-template-columns: 1fr;
-        grid-auto-rows: 250px;
-        gap: 0.8rem;
-        padding: 0 10px;
-    }
+    .gallery-grid { padding: 0 10px; }
     
     .gallery-item.tall,
     .gallery-item.wide,
-    .gallery-item.featured {
-        grid-column: span 1;
-        grid-row: span 1;
-    }
+    .gallery-item.featured { width: 100%; margin-bottom: 0.8rem; }
 }
 
 /* Gallery CTA */
@@ -407,22 +417,14 @@
         line-height: 1.6;
     }
     
-    .gallery-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-        grid-auto-rows: 280px;
-        padding: 0 1rem;
-    }
+    .gallery-grid { padding: 0 1rem; }
     
     .gallery-item {
         border-radius: 8px;
     }
 
     .gallery-item.tall,
-    .gallery-item.wide {
-        grid-row: span 1;
-        grid-column: span 1;
-    }
+    .gallery-item.wide { width: 100%; margin-bottom: 1rem; }
     
     .gallery-overlay {
         position: relative;
@@ -499,11 +501,7 @@
         line-height: 1.5;
     }
     
-    .gallery-grid {
-        grid-auto-rows: 240px;
-        gap: 1rem;
-        padding: 0 0.5rem;
-    }
+    .gallery-grid { padding: 0 0.5rem; }
 
     .gallery-item {
         border-radius: 6px;
@@ -573,28 +571,16 @@
         font-size: 0.7rem;
     }
 }
-    
-    .gallery-overlay p {
-        font-size: 0.9rem;
-    }
-    
-    .gallery-cta h2 {
-        font-size: 1.8rem;
-    }
-    
-    .gallery-cta p {
-        font-size: 1rem;
-    }
-}
 
-/* Animation for gallery items */
+/* Animation for gallery items — make visible by default so images show even if JS doesn't run */
 .gallery-item {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    opacity: 1;
+    transform: none;
+    transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 .gallery-item.animate {
+    /* optional subtle lift when JS applies .animate */
     opacity: 1;
     transform: translateY(0);
 }
@@ -619,4 +605,13 @@
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+/* Ensure gallery items and images are visible by default (override other animation CSS) */
+.gallery .gallery-item,
+.gallery .gallery-item img {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    display: block !important;
 }
